@@ -55,28 +55,82 @@ torch optimizers:
 
 ## Optimization test functions
 
-You can also test optimizers using optimization test functions and
-visualize them. Optimization functions are useful to evaluate
-characteristics of optimization algorithms, such as convergence rate,
-precision, robustness, and performance. `torchopt` provide some test
-functions to give an idea about the different situations that
-optimization algorithms can face when coping with optimization problems.
+You can also test optimizers using optimization
+[https://en.wikipedia.org/wiki/Test\_functions\_for\_optimization](test%20functions)
+provided by `torchopt` such as, `"beale"`, `"booth"`, `"bukin_n6"`,
+`"easom"`, `"goldstein_price"`, `"himmelblau"`, `"levi_n13"`,
+`"matyas"`, `"rastrigin"`, `"rosenbrock"`, `"sphere"`. Optimization
+functions are useful to evaluate characteristics of optimization
+algorithms, such as convergence rate, precision, robustness, and
+performance. These functions give an idea about the different situations
+that optimization algorithms can face. The following code, plot the
+2D-space of `"beale"` function.
 
 ``` r
 library(torchopt)
-test_functions(test_fn = "beale")
+test_function(test_fn = "beale")
 ```
 
-<img src="man/figures/README-opt_fun-1.png" width="5" height="5" />
+<img src="man/figures/README-opt_fun-1.png" width="50%" height="50%" />
 
-Use [https://CRAN.R-project.org/package=gifski](gifski) package to
-generate an animated gif. In the following examples, we test each
-optimizer using `"beale"` and `"rastrigin"` test functions.
+In what follows, we perform optimization tests using Beale test
+function. Each test runs 100 optimization steps. Learning rate is
+parameter is set to `lr=0.01`. We used
+[https://CRAN.R-project.org/package=gifski](gifski) package to generate
+an animated gif.
 
--   `optim_adamw()`: AdamW optimizer proposed by Loshchilov & Hutter
-    (2019). We ported it from the `pytorch` code developed by Collin
-    Donahue-Oponski available at
-    <https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3>
+-   `optim_adamw()`:
+
+``` r
+# set manual seed
+torch::torch_manual_seed(42)
+test_optim(
+    opt = optim_adamw,
+    opt_hparams = list(lr = 0.1),
+    test_fn = "beale",
+    bg_x_lim = c(-5, 5),
+    bg_y_lim = c(-5, 5),
+    plot_each_step = TRUE
+)
+```
+
+<img src="man/figures/README-test_adamw-.gif" width="50%" height="50%" />
+
+-   `optim_yogi()`:
+
+``` r
+# set manual seed
+torch::torch_manual_seed(42)
+test_optim(
+    opt = optim_yogi,
+    opt_hparams = list(lr = 0.1),
+    test_fn = "beale",
+    bg_x_lim = c(-5, 5),
+    bg_y_lim = c(-5, 5),
+    plot_each_step = TRUE
+)
+```
+
+<img src="man/figures/README-test_yogi-.gif" width="50%" height="50%" />
+
+-   `optim_adabound()`:
+
+``` r
+# set manual seed
+torch::torch_manual_seed(42)
+test_optim(
+    opt = optim_adabound,
+    opt_hparams = list(lr = 0.1),
+    test_fn = "beale",
+    bg_x_lim = c(-5, 5),
+    bg_y_lim = c(-5, 5),
+    plot_each_step = TRUE
+)
+```
+
+<img src="man/figures/README-test_adabound-.gif" width="50%" height="50%" />
+
+-   `optim_madgrad()`:
 
 ``` r
 # set manual seed
@@ -85,29 +139,13 @@ test_optim(
     opt = optim_madgrad,
     opt_hparams = list(lr = 0.1),
     test_fn = "beale",
-    steps = 100,
     bg_x_lim = c(-5, 5),
     bg_y_lim = c(-5, 5),
     plot_each_step = TRUE
 )
 ```
 
-<img src="man/figures/README-gif_opt-.gif" width="5" height="5" />
-
--   `optim_yogi()`: Yogi optimizer proposed by Zaheer et al.(2019). We
-    ported it from the `pytorch` code developed by Nikolay Novik
-    available at
-    <https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py>
-
--   `optim_adabound()`: Adabound optimizer proposed by Luo et al.(2019).
-    The original implementation is available at
-    <https://github.com/Luolc/AdaBound>.
-
--   `optim_madgrad()`: Momentumized, Adaptive, Dual Averaged Gradient
-    Method for Stochastic Optimization (MADGRAD) optimizer proposed by
-    Defazio & Jelassi (2021). The function is imported from
-    [https://CRAN.R-project.org/package=madgrad](madgrad) package and
-    the source code is available at <https://github.com/mlverse/madgrad>
+<img src="man/figures/README-test_madgrad-.gif" width="50%" height="50%" />
 
 ## Acknowledgements
 

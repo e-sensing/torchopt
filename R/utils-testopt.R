@@ -1,3 +1,4 @@
+
 beale <- function(x, y) {
     log((1.5 - x + x * y)^2 + (2.25 - x - x * y^2)^2 + (2.625 - x + x * y^3)^2)
 }
@@ -47,21 +48,20 @@ sphere <- function(x, y) {
 }
 
 #' @export
-test_functions <- function(test_fn, ...,
-                           n_col = 2,
-                           bg_x_lim = c(-5, 5),
-                           bg_y_lim = c(-5, 5),
-                           bg_xy_breaks = 100,
-                           bg_z_breaks = 32,
-                           bg_palette = "viridis",
-                           ct_levels = 10,
-                           ct_labels = TRUE,
-                           ct_color = "#FFFFFF50") {
+test_function <- function(test_fn, ...,
+                          bg_x_lim = c(-5, 5),
+                          bg_y_lim = c(-5, 5),
+                          bg_xy_breaks = 100,
+                          bg_z_breaks = 32,
+                          bg_palette = "viridis",
+                          ct_levels = 10,
+                          ct_labels = TRUE,
+                          ct_color = "#FFFFFF50") {
 
     # get gradient function
-    fn_lst <- lapply(test_fn, function(fn) {
+    test_fn <-
         tryCatch({
-            get(fn,
+            get(test_fn,
                 envir = asNamespace("torchopt"),
                 inherits = FALSE
             )
@@ -69,51 +69,34 @@ test_functions <- function(test_fn, ...,
         error = function(e) {
             stop("invalid 'test_fn' parameter.", call. = FALSE)
         })
-    })
 
     # prepare data for gradient plot
     x <- seq(bg_x_lim[[1]], bg_x_lim[[2]], length.out = bg_xy_breaks)
     y <- seq(bg_y_lim[[1]], bg_y_lim[[2]], length.out = bg_xy_breaks)
+    z <- outer(X = x, Y = y, FUN = test_fn)
 
-    if (length(fn_lst) < n_col) {
-        n_col <- length(fn_lst)
-    }
+    # plot background
+    image(
+        x = x,
+        y = y,
+        z = z,
+        col = hcl.colors(
+            n = bg_z_breaks,
+            palette = bg_palette
+        ),
+        ...
+    )
 
-    n_row <- ceiling(length(fn_lst) / n_col)
-
-    layout(matrix(seq_len(n_row * n_col), nrow = n_row, byrow = TRUE))
-
-    for (i in seq_along(fn_lst)) {
-
-        fn <- fn_lst[[i]]
-        fn_name <- test_fn[[i]]
-        z <- outer(X = x, Y = y, FUN = fn)
-
-        # plot background
-        image(
-            x = x,
-            y = y,
-            z = z,
-            col = hcl.colors(
-                n = bg_z_breaks,
-                palette = bg_palette
-            ),
-            main = fn_name,
-            ...
-        )
-
-        # plot contour
-        contour(
-            x = x,
-            y = y,
-            z = z,
-            nlevels = ct_levels,
-            drawlabels = ct_labels,
-            col = ct_color,
-            add = TRUE
-        )
-
-    }
+    # plot contour
+    contour(
+        x = x,
+        y = y,
+        z = z,
+        nlevels = ct_levels,
+        drawlabels = ct_labels,
+        col = ct_color,
+        add = TRUE
+    )
 
 }
 
@@ -252,71 +235,3 @@ test_optim <- function(opt, ...,
         )
     }
 }
-
-# plot_bg(
-#     grad_fn = beale,
-#     x_lim = c(-5, 5),
-#     y_lim = c(-5, 5)
-# )
-#
-# plot_bg(
-#     grad_fn = booth,
-#     x_lim = c(-10, 10),
-#     y_lim = c(-10, 10)
-# )
-#
-# plot_bg(
-#     grad_fn = bukin_n6,
-#     x_lim = c(-15, -5),
-#     y_lim = c(-4, 6)
-# )
-#
-# plot_bg(
-#     grad_fn = easom,
-#     x_lim = c(-1, 7),
-#     y_lim = c(-1, 7)
-# )
-#
-# plot_bg(
-#     grad_fn = goldstein_price,
-#     x_lim = c(-2, 2),
-#     y_lim = c(-3, 1)
-# )
-#
-# plot_bg(
-#     grad_fn = himmelblau,
-#     x_lim = c(-5, 5),
-#     y_lim = c(-5, 5)
-# )
-#
-# plot_bg(
-#     grad_fn = levi_n13,
-#     x_lim = c(-4, 6),
-#     y_lim = c(-4, 6),
-#     contour_levels = 0
-# )
-#
-# plot_bg(
-#     grad_fn = matyas,
-#     x_lim = c(-10, 10),
-#     y_lim = c(-10, 10),
-#     contour_levels = 5
-# )
-#
-# plot_bg(
-#     grad_fn = rastrigin,
-#     x_lim = c(-5, 5),
-#     y_lim = c(-5, 5)
-# )
-#
-# plot_bg(
-#     grad_fn = rosenbrock,
-#     x_lim = c(-2, 2),
-#     y_lim = c(-1, 3)
-# )
-#
-# plot_bg(
-#     grad_fn = sphere,
-#     x_lim = c(-2, 2),
-#     y_lim = c(-2, 2)
-# )
