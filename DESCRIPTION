@@ -1,0 +1,25 @@
+Type: Package
+Package: torchopt
+Title: R implementation of advanced optimizers for torch
+Version: 0.1.0
+Authors@R: c(
+    person("Gilberto", "Camara", , "gilberto.camara@inpe.br", role = c("aut", "cre")),
+    person("Rolf", "Simoes", , "rolf.simoes@inpe.br", role = "aut"),
+    person("Felipe", "Souza", , "felipe.carvalho@inpe.br", role = "aut"),
+    person("Alber", "Sanchez", , "alber.ipia@inpe.br", role = "aut")
+  )
+Maintainer: Gilberto Camara <gilberto.camara@inpe.br>
+Description: A set of R implementations of deep learning optimizers for torch.
+License: GPL-2 | file LICENSE
+Encoding: UTF-8
+ByteCompile: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+URL: https://github.com/e-sensing/torchoptimizers/
+Depends: R (>= 3.5.0)
+Imports:
+    madgrad,
+    magrittr,
+    torch
+Suggests:
+    gifski
