@@ -21,7 +21,6 @@ Imports:
     graphics,
     grDevices,
     madgrad,
-    magrittr,
     stats,
     torch
 Suggests:
