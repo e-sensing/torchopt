@@ -32,19 +32,9 @@ You can install the development version of `torchopt` like so:
 install_github("e-sensing/torchopt)
 ```
 
-## Example
-
-This following example shows you how to use `AdamW` optimizer proposed
-by Loshchilov & Hutter (2019):
-
-```{r example}
-library(torchopt)
-## basic example code
-```
-
 ## Provided optimizers
 
-`torchoptimizers` package provides the following R implementation of torch optimizers:
+`torchopt` package provides the following R implementation of torch optimizers:
 
 * `optim_adamw()`: AdamW optimizer proposed by Loshchilov & Hutter (2019). 
 We ported it from the `pytorch` code developed by Collin Donahue-Oponski 
@@ -58,26 +48,27 @@ available at <https://github.com/jettify/pytorch-optimizer/blob/master/torch_opt
 The original implementation is available at <https://github.com/Luolc/AdaBound>.
 
 * `optim_madgrad()`: Momentumized, Adaptive, Dual Averaged Gradient Method for Stochastic Optimization (MADGRAD) optimizer proposed by Defazio & Jelassi (2021).
-The function is imported from [https://CRAN.R-project.org/package=madgrad](madgrad) package and the source code is available at <https://github.com/mlverse/madgrad>
+The function is imported from [madgrad](https://CRAN.R-project.org/package=madgrad) package and the source code is available at <https://github.com/mlverse/madgrad>
 
 ## Optimization test functions
 
-You can also test optimizers using optimization [https://en.wikipedia.org/wiki/Test_functions_for_optimization](test functions) provided by `torchopt` such as, `"beale"`, `"booth"`, `"bukin_n6"`, `"easom"`, `"goldstein_price"`, `"himmelblau"`, `"levi_n13"`, `"matyas"`, `"rastrigin"`, `"rosenbrock"`, `"sphere"`. Optimization functions are useful to evaluate characteristics of optimization algorithms, such as convergence rate, precision, robustness, and performance. These functions give an idea about the different situations that optimization algorithms can face. The following code, plot the 2D-space of `"beale"` function.
+You can also test optimizers using optimization [test functions](https://en.wikipedia.org/wiki/Test_functions_for_optimization) provided by `torchopt` such as, `"beale"`, `"booth"`, `"bukin_n6"`, `"easom"`, `"goldstein_price"`, `"himmelblau"`, `"levi_n13"`, `"matyas"`, `"rastrigin"`, `"rosenbrock"`, `"sphere"`. Optimization functions are useful to evaluate characteristics of optimization algorithms, such as convergence rate, precision, robustness, and performance. These functions give an idea about the different situations that optimization algorithms can face. The following code, plot the 2D-space of `"beale"` function.
 
 ```{r opt_fun, echo=TRUE, fig.height=8, fig.width=8, out.height='50%', out.width='50%', dpi=96}
 library(torchopt)
 test_function(test_fn = "beale")
 ```
 
-In what follows, we perform optimization tests using Beale test function. Each test runs 100 optimization steps. Learning rate is parameter is set to `lr=0.01`. We used [https://CRAN.R-project.org/package=gifski](gifski) package to 
-generate an animated gif.
+In what follows, we perform tests using `"beale"` test function. Each test runs 100 optimization steps. The learning rate hyper-parameter is set to `lr=0.1`. To
+visualize an animated GIF, we set `plot_each_step=TRUE` and capture each step
+frame using [gifski](https://CRAN.R-project.org/package=gifski) package.
 
-* `optim_adamw()`:
+### `optim_adamw()`:
 
-```{r test_adamw, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
+```{r test_adamw, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%', cache=TRUE}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adamw,
     opt_hparams = list(lr = 0.1),
@@ -90,12 +81,12 @@ test_optim(
 ```
 
 
-* `optim_yogi()`: 
+### `optim_yogi()`: 
 
-```{r test_yogi, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
+```{r test_yogi, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%', cache=TRUE}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_yogi,
     opt_hparams = list(lr = 0.1),
@@ -107,12 +98,12 @@ test_optim(
 
 ```
 
-* `optim_adabound()`: 
+### `optim_adabound()`: 
 
-```{r test_adabound, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
+```{r test_adabound, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%', cache=TRUE}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adabound,
     opt_hparams = list(lr = 0.1),
@@ -124,12 +115,12 @@ test_optim(
 
 ```
 
-* `optim_madgrad()`: 
+### `optim_madgrad()`: 
 
-```{r test_madgrad, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
+```{r test_madgrad, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%', cache=TRUE}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_madgrad,
     opt_hparams = list(lr = 0.1),
@@ -144,11 +135,19 @@ test_optim(
 
 ## Acknowledgements
 
-We thankful to 
+We are thankful to 
 Collin Donahue-Oponski <https://github.com/colllin>, 
-Nikolay Novik <https://github.com/jettify>, and
-Liangchen Luo <https://github.com/Luolc>
-for proving pytorch code.
+Nikolay Novik <https://github.com/jettify>,
+Liangchen Luo <https://github.com/Luolc>, and
+for providing pytorch code; and
+Daniel Falbel <https://github.com/dfalbel>
+for providing examples of torch code in R.
+
+
+## Code of Conduct
+
+Please note that the torchopt project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+
 
 ## References
 

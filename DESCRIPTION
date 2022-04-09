@@ -21,9 +21,10 @@ Imports:
     graphics,
     grDevices,
     madgrad,
-    magrittr,
     stats,
     torch
 Suggests:
     covr,
-    gifski
+    gifski,
+    spelling
+Language: en-US
