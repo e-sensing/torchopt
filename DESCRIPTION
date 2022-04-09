@@ -26,4 +26,6 @@ Imports:
     torch
 Suggests:
     covr,
-    gifski
+    gifski,
+    spelling
+Language: en-US

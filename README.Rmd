@@ -69,15 +69,16 @@ library(torchopt)
 test_function(test_fn = "beale")
 ```
 
-In what follows, we perform optimization tests using Beale test function. Each test runs 100 optimization steps. Learning rate is parameter is set to `lr=0.01`. We used [https://CRAN.R-project.org/package=gifski](gifski) package to 
-generate an animated gif.
+In what follows, we perform tests using `"beale"` test function. Each test runs 100 optimization steps. The learning rate hyper-parameter is set to `lr=0.1`. To
+visualize an animated GIF, we set `plot_each_step=TRUE` and capture each step
+frame using [https://CRAN.R-project.org/package=gifski](gifski) package.
 
-* `optim_adamw()`:
+### `optim_adamw()`:
 
 ```{r test_adamw, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adamw,
     opt_hparams = list(lr = 0.1),
@@ -90,12 +91,12 @@ test_optim(
 ```
 
 
-* `optim_yogi()`: 
+### `optim_yogi()`: 
 
 ```{r test_yogi, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_yogi,
     opt_hparams = list(lr = 0.1),
@@ -107,12 +108,12 @@ test_optim(
 
 ```
 
-* `optim_adabound()`: 
+### `optim_adabound()`: 
 
 ```{r test_adabound, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adabound,
     opt_hparams = list(lr = 0.1),
@@ -124,12 +125,12 @@ test_optim(
 
 ```
 
-* `optim_madgrad()`: 
+### `optim_madgrad()`: 
 
 ```{r test_madgrad, echo=TRUE, fig.show='animate', fig.height=8, fig.width=8, animation.hook='gifski', aniopts='loop', dpi=96, interval=0.1, out.height='50%', out.width='50%'}
 
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_madgrad,
     opt_hparams = list(lr = 0.1),
@@ -149,6 +150,12 @@ Collin Donahue-Oponski <https://github.com/colllin>,
 Nikolay Novik <https://github.com/jettify>, and
 Liangchen Luo <https://github.com/Luolc>
 for proving pytorch code.
+
+
+## Code of Conduct
+
+Please note that the torchopt project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+
 
 ## References
 

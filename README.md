@@ -77,17 +77,17 @@ test_function(test_fn = "beale")
 
 <img src="man/figures/README-opt_fun-1.png" width="50%" height="50%" />
 
-In what follows, we perform optimization tests using Beale test
-function. Each test runs 100 optimization steps. Learning rate is
-parameter is set to `lr=0.01`. We used
-[https://CRAN.R-project.org/package=gifski](gifski) package to generate
-an animated gif.
+In what follows, we perform tests using `"beale"` test function. Each
+test runs 100 optimization steps. The learning rate hyper-parameter is
+set to `lr=0.1`. To visualize an animated GIF, we set
+`plot_each_step=TRUE` and capture each step frame using
+[https://CRAN.R-project.org/package=gifski](gifski) package.
 
--   `optim_adamw()`:
+### `optim_adamw()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adamw,
     opt_hparams = list(lr = 0.1),
@@ -100,11 +100,11 @@ test_optim(
 
 <img src="man/figures/README-test_adamw-.gif" width="50%" height="50%" />
 
--   `optim_yogi()`:
+### `optim_yogi()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_yogi,
     opt_hparams = list(lr = 0.1),
@@ -117,11 +117,11 @@ test_optim(
 
 <img src="man/figures/README-test_yogi-.gif" width="50%" height="50%" />
 
--   `optim_adabound()`:
+### `optim_adabound()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adabound,
     opt_hparams = list(lr = 0.1),
@@ -134,11 +134,11 @@ test_optim(
 
 <img src="man/figures/README-test_adabound-.gif" width="50%" height="50%" />
 
--   `optim_madgrad()`:
+### `optim_madgrad()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_madgrad,
     opt_hparams = list(lr = 0.1),
@@ -156,6 +156,13 @@ test_optim(
 We thankful to Collin Donahue-Oponski <https://github.com/colllin>,
 Nikolay Novik <https://github.com/jettify>, and Liangchen Luo
 <https://github.com/Luolc> for proving pytorch code.
+
+## Code of Conduct
+
+Please note that the torchopt project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## References
 
