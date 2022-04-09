@@ -22,16 +22,6 @@ You can install the development version of `torchopt` like so:
 install_github("e-sensing/torchopt)
 ```
 
-## Example
-
-This following example shows you how to use `AdamW` optimizer proposed
-by Loshchilov & Hutter (2019):
-
-``` r
-library(torchopt)
-## basic example code
-```
-
 ## Provided optimizers
 
 `torchoptimizers` package provides the following R implementation of
@@ -54,13 +44,13 @@ torch optimizers:
 -   `optim_madgrad()`: Momentumized, Adaptive, Dual Averaged Gradient
     Method for Stochastic Optimization (MADGRAD) optimizer proposed by
     Defazio & Jelassi (2021). The function is imported from
-    [https://CRAN.R-project.org/package=madgrad](madgrad) package and
+    [madgrad](https://CRAN.R-project.org/package=madgrad) package and
     the source code is available at <https://github.com/mlverse/madgrad>
 
 ## Optimization test functions
 
-You can also test optimizers using optimization
-[https://en.wikipedia.org/wiki/Test\_functions\_for\_optimization](test%20functions)
+You can also test optimizers using optimization [test
+functions](https://en.wikipedia.org/wiki/Test_functions_for_optimization)
 provided by `torchopt` such as, `"beale"`, `"booth"`, `"bukin_n6"`,
 `"easom"`, `"goldstein_price"`, `"himmelblau"`, `"levi_n13"`,
 `"matyas"`, `"rastrigin"`, `"rosenbrock"`, `"sphere"`. Optimization
@@ -77,17 +67,17 @@ test_function(test_fn = "beale")
 
 <img src="man/figures/README-opt_fun-1.png" width="50%" height="50%" />
 
-In what follows, we perform optimization tests using Beale test
-function. Each test runs 100 optimization steps. Learning rate is
-parameter is set to `lr=0.01`. We used
-[https://CRAN.R-project.org/package=gifski](gifski) package to generate
-an animated gif.
+In what follows, we perform tests using `"beale"` test function. Each
+test runs 100 optimization steps. The learning rate hyper-parameter is
+set to `lr=0.1`. To visualize an animated GIF, we set
+`plot_each_step=TRUE` and capture each step frame using
+[gifski](https://CRAN.R-project.org/package=gifski) package.
 
--   `optim_adamw()`:
+### `optim_adamw()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adamw,
     opt_hparams = list(lr = 0.1),
@@ -100,11 +90,11 @@ test_optim(
 
 <img src="man/figures/README-test_adamw-.gif" width="50%" height="50%" />
 
--   `optim_yogi()`:
+### `optim_yogi()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_yogi,
     opt_hparams = list(lr = 0.1),
@@ -117,11 +107,11 @@ test_optim(
 
 <img src="man/figures/README-test_yogi-.gif" width="50%" height="50%" />
 
--   `optim_adabound()`:
+### `optim_adabound()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_adabound,
     opt_hparams = list(lr = 0.1),
@@ -134,11 +124,11 @@ test_optim(
 
 <img src="man/figures/README-test_adabound-.gif" width="50%" height="50%" />
 
--   `optim_madgrad()`:
+### `optim_madgrad()`:
 
 ``` r
 # set manual seed
-torch::torch_manual_seed(42)
+set.seed(42)
 test_optim(
     opt = optim_madgrad,
     opt_hparams = list(lr = 0.1),
@@ -153,9 +143,18 @@ test_optim(
 
 ## Acknowledgements
 
-We thankful to Collin Donahue-Oponski <https://github.com/colllin>,
-Nikolay Novik <https://github.com/jettify>, and Liangchen Luo
-<https://github.com/Luolc> for proving pytorch code.
+We are thankful to Collin Donahue-Oponski <https://github.com/colllin>,
+Nikolay Novik <https://github.com/jettify>, Liangchen Luo
+<https://github.com/Luolc>, and for providing pytorch code; and Daniel
+Falbel <https://github.com/dfalbel> for providing examples of torch code
+in R.
+
+## Code of Conduct
+
+Please note that the torchopt project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## References
 
