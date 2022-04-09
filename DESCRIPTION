@@ -18,8 +18,12 @@ RoxygenNote: 7.1.2
 URL: https://github.com/e-sensing/torchoptimizers/
 Depends: R (>= 3.5.0)
 Imports:
+    graphics,
+    grDevices,
     madgrad,
     magrittr,
+    stats,
     torch
 Suggests:
+    covr,
     gifski

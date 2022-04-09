@@ -56,19 +56,23 @@ test_function <- function(test_fn, ...,
                           bg_palette = "viridis",
                           ct_levels = 10,
                           ct_labels = TRUE,
-                          ct_color = "#FFFFFF50") {
+                          ct_color = "#FFFFFF7F") {
 
-    # get gradient function
-    test_fn <-
-        tryCatch({
-            get(test_fn,
-                envir = asNamespace("torchopt"),
-                inherits = FALSE
-            )
-        },
-        error = function(e) {
-            stop("invalid 'test_fn' parameter.", call. = FALSE)
-        })
+    # pre-conditions
+    if (is.character(test_fn)) {
+        if (!exists(test_fn,
+                    envir = asNamespace("torchopt"),
+                    inherits = FALSE)) {
+            stop("invalid 'test_fn' param.", call. = FALSE)
+        }
+        # get gradient function
+        test_fn <- get(test_fn,
+                       envir = asNamespace("torchopt"),
+                       inherits = FALSE)
+    }
+    if (!is.function(test_fn)) {
+        stop("invalid 'test_fn' param.", call. = FALSE)
+    }
 
     # prepare data for gradient plot
     x <- seq(bg_x_lim[[1]], bg_x_lim[[2]], length.out = bg_xy_breaks)
@@ -88,24 +92,24 @@ test_function <- function(test_fn, ...,
     )
 
     # plot contour
-    contour(
-        x = x,
-        y = y,
-        z = z,
-        nlevels = ct_levels,
-        drawlabels = ct_labels,
-        col = ct_color,
-        add = TRUE
-    )
+    if (ct_levels > 0) {
+        contour(
+            x = x,
+            y = y,
+            z = z,
+            nlevels = ct_levels,
+            drawlabels = ct_labels,
+            col = ct_color,
+            add = TRUE
+        )
+    }
 
 }
 
 #' @export
-test_optim <- function(opt, ...,
-                       params = list(
-                           torch::torch_randint(-5, 5, 1, requires_grad = TRUE),
-                           torch::torch_randint(-5, 5, 1, requires_grad = TRUE)
-                       ),
+test_optim <- function(optim, ...,
+                       x0 = runif(1, -5, 5),
+                       y0 = runif(1, -5, 5),
                        opt_hparams = list(lr = 0.01),
                        test_fn = "beale",
                        steps = 100,
@@ -120,29 +124,34 @@ test_optim <- function(opt, ...,
                        bg_palette = "viridis",
                        ct_levels = 10,
                        ct_labels = FALSE,
-                       ct_color = "#FFFFFF50",
+                       ct_color = "#FFFFFF7F",
                        plot_each_step = FALSE) {
 
-    stopifnot(inherits(opt, "function"))
+    # pre-conditions
+    if (!inherits(optim, "function")) {
+        stop("invalid 'opt' param.", call. = FALSE)
+    }
+    if (is.character(test_fn)) {
+        if (!exists(test_fn,
+                    envir = asNamespace("torchopt"),
+                    inherits = FALSE)) {
+            stop("invalid 'test_fn' param.", call. = FALSE)
+        }
+        # get gradient function
+        test_fn <- get(test_fn,
+                       envir = asNamespace("torchopt"),
+                       inherits = FALSE)
+    }
+    if (!is.function(test_fn)) {
+        stop("invalid 'test_fn' param.", call. = FALSE)
+    }
 
-    opt <- do.call(opt, c(list(params = params), opt_hparams))
+    # create tensor
+    x <- torch::torch_tensor(x0, requires_grad = TRUE)
+    y <- torch::torch_tensor(y0, requires_grad = TRUE)
 
-    stopifnot(length(opt$param_groups[[1]]$params) == 2)
-
-    # get gradient function
-    test_fn <- tryCatch({
-        get(test_fn,
-            envir = asNamespace("torchopt"),
-            inherits = FALSE
-        )
-    },
-    error = function(e) {
-        stop("invalid 'test_fn' parameter.", call. = FALSE)
-    })
-
-    # get params
-    x <- opt$param_groups[[1]]$params[[1]]
-    y <- opt$param_groups[[1]]$params[[2]]
+    # instantiate optimizer
+    optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
 
     # run optimizer
     x_steps <- numeric(steps)
@@ -150,10 +159,10 @@ test_optim <- function(opt, ...,
     for (i in seq_len(steps)) {
         x_steps[i] <- as.numeric(x)
         y_steps[i] <- as.numeric(y)
-        opt$zero_grad()
+        optim$zero_grad()
         z <- test_fn(x, y)
         z$backward()
-        opt$step()
+        optim$step()
     }
 
     # prepare plot
@@ -200,15 +209,17 @@ test_optim <- function(opt, ...,
         )
 
         # plot contour
-        contour(
-            x = x,
-            y = y,
-            z = z,
-            nlevels = ct_levels,
-            drawlabels = ct_labels,
-            col = ct_color,
-            add = TRUE
-        )
+        if (ct_levels > 0) {
+            contour(
+                x = x,
+                y = y,
+                z = z,
+                nlevels = ct_levels,
+                drawlabels = ct_labels,
+                col = ct_color,
+                add = TRUE
+            )
+        }
 
         # plot starting point
         points(

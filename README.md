@@ -4,6 +4,10 @@
 # torchopt
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/e-sensing/torchopt/branch/main/graph/badge.svg)](https://app.codecov.io/gh/e-sensing/torchopt?branch=main)
+[![R-CMD-check](https://github.com/e-sensing/torchopt/workflows/R-CMD-check/badge.svg)](https://github.com/e-sensing/torchopt/actions)
 <!-- badges: end -->
 
 The goal of `torchopt` is to provide deep learning optimizers proposed
