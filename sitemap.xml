@@ -4,6 +4,9 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
@@ -26,6 +29,15 @@
   </url>
   <url>
     <loc>/reference/optim_yogi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/state-set.html</loc>
+  </url>
+  <url>
+    <loc>/reference/state.html</loc>
+  </url>
+  <url>
+    <loc>/reference/test_optim.html</loc>
   </url>
   <url>
     <loc>/reference/torchopt-package.html</loc>
