@@ -24,8 +24,8 @@ install_github("e-sensing/torchopt)
 
 ## Provided optimizers
 
-`torchoptimizers` package provides the following R implementation of
-torch optimizers:
+`torchopt` package provides the following R implementation of torch
+optimizers:
 
 -   `optim_adamw()`: AdamW optimizer proposed by Loshchilov & Hutter
     (2019). We ported it from the `pytorch` code developed by Collin
