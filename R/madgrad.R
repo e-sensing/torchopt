@@ -2,7 +2,6 @@
 #'
 #' @name optim_madgrad
 #' @rdname optim_madgrad
-#' @keywords internal
 #' @importFrom madgrad optim_madgrad
 #'
 #' @author Daniel Falbel, \email{dfalbel@@gmail.com}

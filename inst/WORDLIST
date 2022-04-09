@@ -9,6 +9,7 @@ CMD
 Codecov
 Defazio
 Devendra
+dfalbel
 Falbel
 Hutter
 ICLR
@@ -61,4 +62,5 @@ preprint
 py
 pytorch
 rescaled
+viridis
 wikipedia
