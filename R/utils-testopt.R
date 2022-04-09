@@ -47,6 +47,65 @@ sphere <- function(x, y) {
     x^2 + y^2
 }
 
+#' @title Test optimization function
+#'
+#' @name test_optim
+#'
+#' @author Rolf Simoes, \email{rolf.simoes@@inpe.br}
+#'
+#' @description
+#' `test_optim()` function is useful to visualize how optimizers solve the
+#' minimization problem by showing the convergence path using a test function.
+#' User can choose any test optimization
+#' [functions](https://en.wikipedia.org/wiki/Test_functions_for_optimization)
+#' provided by `torchopt`:
+#'
+#' - `"beale"`, `"booth"`, `"bukin_n6"`, `"easom"`, `"goldstein_price"`,
+#' `"himmelblau"`, `"levi_n13"`, `"matyas"`, `"rastrigin"`,
+#' `"rosenbrock"`, and `"sphere"`.
+#'
+#' Besides these functions, users can pass any function that receives two
+#' numerical values and returns a scalar.
+#'
+#' Optimization functions are useful to evaluate characteristics of optimization
+#' algorithms, such as convergence rate, precision, robustness, and performance.
+#' These functions give an idea about the different situations that optimization
+#' algorithms can face.
+#'
+#' Function `test_function()` plot the 2D-space of a test optimization function.
+#'
+#' @param optim          Torch optimizer function.
+#' @param ...            Additional parameters (passed to `image` function).
+#' @param x0,y0          Initial X and Y coordinates
+#'   (default random between `-5` and `5`).
+#' @param opt_hparams    A list with optimizer initialize parameters
+#'   (default `list(lr = 0.01)`).
+#' @param test_fn        A test function (default `"beale"`).
+#' @param steps          Number of steps to run (default `100`).
+#' @param pt_start_color Starting point color (default `"#5050FF7F"`)
+#' @param pt_end_color   Ending point color (default `"#FF5050FF"`)
+#' @param ln_color       Line path color (default `"#FF0000FF"`)
+#' @param ln_weight      Line path weight (default `2`)
+#' @param bg_x_lim       Background X limits (default `NULL`)
+#' @param bg_y_lim       Background Y limits (default `NULL`)
+#' @param bg_xy_breaks   Background X and Y resolution (default `100`)
+#' @param bg_z_breaks    Background Z resolution (default `32`)
+#' @param bg_palette     Background palette (default `"viridis"`)
+#' @param ct_levels      Contour levels (default `10`)
+#' @param ct_labels      Should show contour labels? (default `FALSE`)
+#' @param ct_color       Contour color (default `"#FFFFFF7F"`)
+#' @param plot_each_step Should output each step? (default `FALSE`)
+#'
+#' @examples
+#' # plot test function 2D-space
+#' test_function("rosenbrock")
+#'
+#' # plot optimization path of a initially random stating point
+#' test_optim(optim_madgrad)
+#'
+NULL
+
+#' @rdname test_optim
 #' @export
 test_function <- function(test_fn, ...,
                           bg_x_lim = c(-5, 5),
@@ -106,6 +165,7 @@ test_function <- function(test_fn, ...,
 
 }
 
+#' @rdname test_optim
 #' @export
 test_optim <- function(optim, ...,
                        x0 = runif(1, -5, 5),
