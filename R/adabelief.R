@@ -14,6 +14,9 @@
 #' https://github.com/jettify/pytorch-optimizer.
 #' Thanks to Nikolay Novik of his work on python optimizers.
 #'
+#' The original implementation is licensed using the Apache-2.0 software license.
+#' This implementation is also licensed using Apache-2.0 license.
+#'
 #' From the abstract by the paper by Zhuang et al (2021):
 #' We propose AdaBelief to simultaneously achieve three goals:
 #' fast convergence as in adaptive methods, good generalization as in SGD,
@@ -52,6 +55,35 @@
 #'
 #' @returns
 #' A torch optimizer object implementing the `step` method.
+#'
+#' @examples
+#' if (torch::torch_is_installed()) {
+#' library(torch)
+#' # define test function
+#' test_matyas <- function(x, y) { log(0.26 * (x^2 + y^2) - 0.48 * x * y)}
+#' # define starting point
+#' x0 <- -5
+#' y0 <- -5
+#' # create tensor
+#' x <- torch::torch_tensor(x0, requires_grad = TRUE)
+#' y <- torch::torch_tensor(y0, requires_grad = TRUE)
+#' # define optimizer
+#' optim <- optim_adabelief
+#' opt_hparams <- list(lr = 0.5)
+#' optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
+#' # run optimizer
+#' steps <- 200
+#' x_steps <- numeric(steps)
+#' y_steps <- numeric(steps)
+#' for (i in seq_len(steps)) {
+#'      x_steps[i] <- as.numeric(x)
+#'      y_steps[i] <- as.numeric(y)
+#'      optim$zero_grad()
+#'      z <- test_matyas(x, y)
+#'      z$backward()
+#'      optim$step()
+#' }
+#' }
 #'
 #' @export
 optim_adabelief <- torch::optimizer(

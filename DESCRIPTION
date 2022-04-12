@@ -10,7 +10,7 @@ Authors@R: c(
   )
 Maintainer: Gilberto Camara <gilberto.camara@inpe.br>
 Description: A set of R implementations of deep learning optimizers for torch.
-License: GPL-2 | file LICENSE
+License: Apache License (>= 2) | file LICENSE
 Encoding: UTF-8
 ByteCompile: true
 Roxygen: list(markdown = TRUE)

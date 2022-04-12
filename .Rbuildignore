@@ -5,3 +5,4 @@
 ^\.github$
 ^CODE_OF_CONDUCT\.md$
 ^README_cache$
+^LICENSE\.md$
