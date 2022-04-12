@@ -3,6 +3,7 @@
 \name{test_optim}
 \alias{test_optim}
 \alias{test_function}
+\alias{test_optim_valid}
 \title{Test optimization function}
 \usage{
 test_function(
@@ -21,17 +22,13 @@ test_function(
 test_optim(
   optim,
   ...,
-  x0 = runif(1, -5, 5),
-  y0 = runif(1, -5, 5),
   opt_hparams = list(lr = 0.01),
   test_fn = "beale",
-  steps = 100,
+  steps = 200,
   pt_start_color = "#5050FF7F",
   pt_end_color = "#FF5050FF",
   ln_color = "#FF0000FF",
   ln_weight = 2,
-  bg_x_lim = NULL,
-  bg_y_lim = NULL,
   bg_xy_breaks = 100,
   bg_z_breaks = 32,
   bg_palette = "viridis",
@@ -39,6 +36,13 @@ test_optim(
   ct_labels = FALSE,
   ct_color = "#FFFFFF7F",
   plot_each_step = FALSE
+)
+
+test_optim_valid(
+  optim,
+  opt_hparams = list(lr = 0.01),
+  test_fn = "beale",
+  steps = 100
 )
 }
 \arguments{
@@ -63,9 +67,6 @@ test_optim(
 \item{ct_color}{Contour color (default \code{"#FFFFFF7F"})}
 
 \item{optim}{Torch optimizer function.}
-
-\item{x0, y0}{Initial X and Y coordinates
-(default random between \code{-5} and \code{5}).}
 
 \item{opt_hparams}{A list with optimizer initialize parameters
 (default \code{list(lr = 0.01)}).}

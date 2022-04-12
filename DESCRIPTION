@@ -15,16 +15,15 @@ Encoding: UTF-8
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-URL: https://github.com/e-sensing/torchoptimizers/
-Depends: R (>= 3.5.0)
+URL: https://github.com/e-sensing/torchopt/
+Depends: R (>= 4.1.0)
 Imports:
     graphics,
     grDevices,
-    madgrad,
     stats,
     torch
 Suggests:
     covr,
     gifski,
-    spelling
+    testthat
 Language: en-US

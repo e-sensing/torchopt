@@ -47,7 +47,7 @@ optim_adamw <- torch::optimizer(
     initialize = function(params,
                           lr = 0.01,
                           betas = c(0.9, 0.999),
-                          eps = 0.001,
+                          eps = 1e-8,
                           weight_decay = 1e-6) {
         if (lr <= 0.0)
             stop("Learning rate must be positive.", call. = FALSE)

@@ -11,7 +11,7 @@ A set of R implementations of deep learning optimizers for torch.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/e-sensing/torchoptimizers/}
+  \item \url{https://github.com/e-sensing/torchopt/}
 }
 
 }

@@ -8,7 +8,7 @@ optim_adamw(
   params,
   lr = 0.01,
   betas = c(0.9, 0.999),
-  eps = 0.001,
+  eps = 1e-08,
   weight_decay = 1e-06
 )
 }

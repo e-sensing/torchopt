@@ -3,6 +3,9 @@
 \name{optim_madgrad}
 \alias{optim_madgrad}
 \title{MADGRAD optimizer}
+\usage{
+optim_madgrad(params, lr = 0.01, momentum = 0.9, weight_decay = 0, eps = 1e-06)
+}
 \arguments{
 \item{params}{List of parameters to optimize.}
 
@@ -33,8 +36,6 @@ zero. Momentum values used for SGD or Adam's beta1 should work here also.
 
 On sparse problems both weight_decay and momentum should be set to 0.
 (not yet supported in the R implementation).
-
-See \code{madgrad::\link[madgrad:optim_madgrad]{optim_madgrad}} for details.
 }
 \examples{
 if (torch::torch_is_installed()) {
