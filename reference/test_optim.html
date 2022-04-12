@@ -42,7 +42,7 @@ Function test_function() plot the 2D-space of a test optimization function.'><!-
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/e-sensing/torchoptimizers/" class="external-link">
+  <a href="https://github.com/e-sensing/torchopt/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -57,7 +57,7 @@ Function test_function() plot the 2D-space of a test optimization function.'><!-
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Test optimization function</h1>
-    <small class="dont-index">Source: <a href="https://github.com/e-sensing/torchoptimizers/blob/HEAD/R/utils-testopt.R" class="external-link"><code>R/utils-testopt.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/e-sensing/torchopt/blob/HEAD/R/utils-testopt.R" class="external-link"><code>R/utils-testopt.R</code></a></small>
     <div class="hidden name"><code>test_optim.Rd</code></div>
     </div>
 
@@ -95,17 +95,13 @@ algorithms can face.</p>
 <span class="fu">test_optim</span><span class="op">(</span>
   <span class="va">optim</span>,
   <span class="va">...</span>,
-  x0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
-  y0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
   opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,
   test_fn <span class="op">=</span> <span class="st">"beale"</span>,
-  steps <span class="op">=</span> <span class="fl">100</span>,
+  steps <span class="op">=</span> <span class="fl">200</span>,
   pt_start_color <span class="op">=</span> <span class="st">"#5050FF7F"</span>,
   pt_end_color <span class="op">=</span> <span class="st">"#FF5050FF"</span>,
   ln_color <span class="op">=</span> <span class="st">"#FF0000FF"</span>,
   ln_weight <span class="op">=</span> <span class="fl">2</span>,
-  bg_x_lim <span class="op">=</span> <span class="cn">NULL</span>,
-  bg_y_lim <span class="op">=</span> <span class="cn">NULL</span>,
   bg_xy_breaks <span class="op">=</span> <span class="fl">100</span>,
   bg_z_breaks <span class="op">=</span> <span class="fl">32</span>,
   bg_palette <span class="op">=</span> <span class="st">"viridis"</span>,
@@ -113,6 +109,13 @@ algorithms can face.</p>
   ct_labels <span class="op">=</span> <span class="cn">FALSE</span>,
   ct_color <span class="op">=</span> <span class="st">"#FFFFFF7F"</span>,
   plot_each_step <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
+
+<span class="fu">test_optim_valid</span><span class="op">(</span>
+  <span class="va">optim</span>,
+  opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,
+  test_fn <span class="op">=</span> <span class="st">"beale"</span>,
+  steps <span class="op">=</span> <span class="fl">100</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -140,9 +143,6 @@ algorithms can face.</p>
 <dd><p>Contour color (default <code>"#FFFFFF7F"</code>)</p></dd>
 <dt>optim</dt>
 <dd><p>Torch optimizer function.</p></dd>
-<dt>x0, y0</dt>
-<dd><p>Initial X and Y coordinates
-(default random between <code>-5</code> and <code>5</code>).</p></dd>
 <dt>opt_hparams</dt>
 <dd><p>A list with optimizer initialize parameters
 (default <code>list(lr = 0.01)</code>).</p></dd>

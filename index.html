@@ -45,7 +45,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/e-sensing/torchoptimizers/" class="external-link">
+  <a href="https://github.com/e-sensing/torchopt/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -81,67 +81,60 @@
 <p><code>torchopt</code> package provides the following R implementation of torch optimizers:</p>
 <ul>
 <li><p><code><a href="reference/optim_adamw.html">optim_adamw()</a></code>: AdamW optimizer proposed by Loshchilov &amp; Hutter (2019). We ported it from the <code>pytorch</code> code developed by Collin Donahue-Oponski available at <a href="https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3" class="external-link uri">https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3</a></p></li>
-<li><p><code><a href="reference/optim_yogi.html">optim_yogi()</a></code>: Yogi optimizer proposed by Zaheer et al.(2019). We ported it from the <code>pytorch</code> code developed by Nikolay Novik available at <a href="https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py" class="external-link uri">https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py</a></p></li>
+<li><p><code><a href="reference/optim_adabelief.html">optim_adabelief()</a></code>: Adabelief optimizer proposed by Zhuang et al (2020). The original implementation is available at <a href="https://github.com/juntang-zhuang/Adabelief-Optimizer" class="external-link uri">https://github.com/juntang-zhuang/Adabelief-Optimizer</a>.</p></li>
 <li><p><code><a href="reference/optim_adabound.html">optim_adabound()</a></code>: Adabound optimizer proposed by Luo et al.(2019). The original implementation is available at <a href="https://github.com/Luolc/AdaBound" class="external-link uri">https://github.com/Luolc/AdaBound</a>.</p></li>
 <li><p><code><a href="reference/optim_madgrad.html">optim_madgrad()</a></code>: Momentumized, Adaptive, Dual Averaged Gradient Method for Stochastic Optimization (MADGRAD) optimizer proposed by Defazio &amp; Jelassi (2021). The function is imported from <a href="https://CRAN.R-project.org/package=madgrad" class="external-link">madgrad</a> package and the source code is available at <a href="https://github.com/mlverse/madgrad" class="external-link uri">https://github.com/mlverse/madgrad</a></p></li>
+<li><p><code><a href="reference/optim_yogi.html">optim_yogi()</a></code>: Yogi optimizer proposed by Zaheer et al.(2019). We ported it from the <code>pytorch</code> code developed by Nikolay Novik available at <a href="https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py" class="external-link uri">https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py</a></p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="optimization-test-functions">Optimization test functions<a class="anchor" aria-label="anchor" href="#optimization-test-functions"></a>
 </h2>
-<p>You can also test optimizers using optimization <a href="https://en.wikipedia.org/wiki/Test_functions_for_optimization" class="external-link">test functions</a> provided by <code>torchopt</code> such as, <code>"beale"</code>, <code>"booth"</code>, <code>"bukin_n6"</code>, <code>"easom"</code>, <code>"goldstein_price"</code>, <code>"himmelblau"</code>, <code>"levi_n13"</code>, <code>"matyas"</code>, <code>"rastrigin"</code>, <code>"rosenbrock"</code>, <code>"sphere"</code>. Optimization functions are useful to evaluate characteristics of optimization algorithms, such as convergence rate, precision, robustness, and performance. These functions give an idea about the different situations that optimization algorithms can face. The following code, plot the 2D-space of <code>"beale"</code> function.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/e-sensing/torchoptimizers/" class="external-link">torchopt</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/test_optim.html">test_function</a></span><span class="op">(</span>test_fn <span class="op">=</span> <span class="st">"beale"</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-opt_fun-1.png" width="50%" height="50%"></p>
-<p>In what follows, we perform tests using <code>"beale"</code> test function. Each test runs 100 optimization steps. The learning rate hyper-parameter is set to <code>lr=0.1</code>. To visualize an animated GIF, we set <code>plot_each_step=TRUE</code> and capture each step frame using <a href="https://CRAN.R-project.org/package=gifski" class="external-link">gifski</a> package.</p>
+<p>You can also test optimizers using optimization <a href="https://en.wikipedia.org/wiki/Test_functions_for_optimization" class="external-link">test functions</a> provided by <code>torchopt</code> including <code>"ackley"</code>, <code>"beale"</code>, <code>"booth"</code>, <code>"bukin_n6"</code>, <code>"easom"</code>, <code>"goldstein_price"</code>, <code>"himmelblau"</code>, <code>"levi_n13"</code>, <code>"matyas"</code>, <code>"rastrigin"</code>, <code>"rosenbrock"</code>, <code>"sphere"</code>. Optimization functions are useful to evaluate characteristics of optimization algorithms, such as convergence rate, precision, robustness, and performance. These functions give an idea about the different situations that optimization algorithms can face.</p>
+<p>In what follows, we perform tests using <code>""goldstein_price""</code> test function. Each test runs 200 optimization steps. The learning rate hyper-parameter is set to <code>lr=0.5</code>. To visualize an animated GIF, we set <code>plot_each_step=TRUE</code> and capture each step frame using <a href="https://CRAN.R-project.org/package=gifski" class="external-link">gifski</a> package.</p>
 <div class="section level3">
 <h3 id="optim_adamw">
 <code>optim_adamw()</code>:<a class="anchor" aria-label="anchor" href="#optim_adamw"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># set manual seed</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># test optim adamw</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
-    opt <span class="op">=</span> <span class="va">optim_adamw</span>,
-    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+    optim <span class="op">=</span> <span class="va">optim_adamw</span>,
     test_fn <span class="op">=</span> <span class="st">"beale"</span>,
-    bg_x_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
-    bg_y_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
+    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
     plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-test_adamw-.gif" width="50%" height="50%"></p>
 </div>
 <div class="section level3">
-<h3 id="optim_yogi">
-<code>optim_yogi()</code>:<a class="anchor" aria-label="anchor" href="#optim_yogi"></a>
+<h3 id="optim_adabelief">
+<code>optim_adabelief()</code>:<a class="anchor" aria-label="anchor" href="#optim_adabelief"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># set manual seed</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
-    opt <span class="op">=</span> <span class="va">optim_yogi</span>,
-    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+    optim <span class="op">=</span> <span class="va">optim_adabelief</span>,
+    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
     test_fn <span class="op">=</span> <span class="st">"beale"</span>,
-    bg_x_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
-    bg_y_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
     plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-test_yogi-.gif" width="50%" height="50%"></p>
+<p><img src="reference/figures/README-test_adabelief-.gif" width="50%" height="50%"></p>
 </div>
 <div class="section level3">
 <h3 id="optim_adabound">
 <code>optim_adabound()</code>:<a class="anchor" aria-label="anchor" href="#optim_adabound"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># set manual seed</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">22</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
-    opt <span class="op">=</span> <span class="va">optim_adabound</span>,
-    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+    optim <span class="op">=</span> <span class="va">optim_adabound</span>,
+    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
     test_fn <span class="op">=</span> <span class="st">"beale"</span>,
-    bg_x_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
-    bg_y_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
     plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-test_adabound-.gif" width="50%" height="50%"></p>
@@ -150,24 +143,38 @@
 <h3 id="optim_madgrad">
 <code>optim_madgrad()</code>:<a class="anchor" aria-label="anchor" href="#optim_madgrad"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># set manual seed</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">256</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
-    opt <span class="op">=</span> <span class="va">optim_madgrad</span>,
+    optim <span class="op">=</span> <span class="va">optim_madgrad</span>,
     opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
     test_fn <span class="op">=</span> <span class="st">"beale"</span>,
-    bg_x_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
-    bg_y_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
     plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-test_madgrad-.gif" width="50%" height="50%"></p>
+</div>
+<div class="section level3">
+<h3 id="optim_yogi">
+<code>optim_yogi()</code>:<a class="anchor" aria-label="anchor" href="#optim_yogi"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># set manual seed</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">66</span><span class="op">)</span>
+<span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
+    optim <span class="op">=</span> <span class="va">optim_yogi</span>,
+    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
+    test_fn <span class="op">=</span> <span class="st">"beale"</span>,
+    plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-test_yogi-.gif" width="50%" height="50%"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
-<p>We are thankful to Collin Donahue-Oponski <a href="https://github.com/colllin" class="external-link uri">https://github.com/colllin</a>, Nikolay Novik <a href="https://github.com/jettify" class="external-link uri">https://github.com/jettify</a>, Liangchen Luo <a href="https://github.com/Luolc" class="external-link uri">https://github.com/Luolc</a>, and for providing pytorch code; and Daniel Falbel <a href="https://github.com/dfalbel" class="external-link uri">https://github.com/dfalbel</a> for providing examples of torch code in R.</p>
+<p>We are thankful to Collin Donahue-Oponski <a href="https://github.com/colllin" class="external-link uri">https://github.com/colllin</a>, Nikolay Novik <a href="https://github.com/jettify" class="external-link uri">https://github.com/jettify</a>, Liangchen Luo <a href="https://github.com/Luolc" class="external-link uri">https://github.com/Luolc</a>, and Juntang Zhuang<a href="https://github.com/juntang-zhuang" class="external-link uri">https://github.com/juntang-zhuang</a> for providing pytorch code; and Daniel Falbel <a href="https://github.com/dfalbel" class="external-link uri">https://github.com/dfalbel</a> for providing examples of torch code in R.</p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
@@ -178,9 +185,10 @@
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <ul>
-<li><p>Ilya Loshchilov, Frank Hutter, “Decoupled Weight Decay Regularization”, International Conference on Learning Representations (ICLR) 2019. <a href="https://doi.org/10.48550/arXiv.1711.05101" class="external-link uri">https://doi.org/10.48550/arXiv.1711.05101</a></p></li>
+<li><p>Ilya Loshchilov, Frank Hutter, “Decoupled Weight Decay Regularization”, International Conference on Learning Representations (ICLR) 2019. <a href="https://doi.org/10.48550/arXiv.1711.05101" class="external-link uri">https://doi.org/10.48550/arXiv.1711.05101</a>.</p></li>
 <li><p>Manzil Zaheer, Sashank Reddi, Devendra Sachan, Satyen Kale, Sanjiv Kumar, “Adaptive Methods for Nonconvex Optimization”, Advances in Neural Information Processing Systems 31 (NeurIPS 2018). <a href="https://papers.nips.cc/paper/8186-adaptive-methods-for-nonconvex-optimization" class="external-link uri">https://papers.nips.cc/paper/8186-adaptive-methods-for-nonconvex-optimization</a></p></li>
-<li><p>Liangchen Luo, Yuanhao Xiong, Yan Liu, Xu Sun, “Adaptive Gradient Methods with Dynamic Bound of Learning Rate”, International Conference on Learning Representations (ICLR), 2019. <a href="https://doi.org/10.48550/arXiv.1902.09843" class="external-link uri">https://doi.org/10.48550/arXiv.1902.09843</a></p></li>
+<li><p>Liangchen Luo, Yuanhao Xiong, Yan Liu, Xu Sun, “Adaptive Gradient Methods with Dynamic Bound of Learning Rate”, International Conference on Learning Representations (ICLR), 2019. <a href="https://doi.org/10.48550/arXiv.1902.09843" class="external-link uri">https://doi.org/10.48550/arXiv.1902.09843</a>.</p></li>
+<li><p>Juntang Zhuang, Tommy Tang, Yifan Ding, Sekhar Tatikonda, Nicha Dvornek, Xenophon Papademetris, James S. Duncan. “AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients”, 34th Conference on Neural Information Processing Systems (NeurIPS 2020), <a href="https://arxiv.org/abs/2010.07468" class="external-link uri">https://arxiv.org/abs/2010.07468</a>.</p></li>
 <li><p>Aaron Defazio, Samy Jelassi, “Adaptivity without Compromise: A Momentumized, Adaptive, Dual Averaged Gradient Method for Stochastic Optimization”, arXiv preprint arXiv:2101.11075, 2021. <a href="https://doi.org/10.48550/arXiv.2101.11075" class="external-link uri">https://doi.org/10.48550/arXiv.2101.11075</a></p></li>
 </ul>
 </div>
@@ -191,7 +199,7 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/e-sensing/torchoptimizers/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/e-sensing/torchopt/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
 
