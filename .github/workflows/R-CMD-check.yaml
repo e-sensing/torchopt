@@ -39,6 +39,8 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      TORCH_TEST: 1
+      TORCH_INSTALL: 1
 
     steps:
       - uses: actions/checkout@v2
