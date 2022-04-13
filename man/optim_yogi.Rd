@@ -38,6 +38,9 @@ by Zaheer et al.(2019). We used the implementation available at
 https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py.
 Thanks to Nikolay Novik for providing the pytorch code.
 
+The original implementation is licensed using the Apache-2.0 software license.
+This implementation is also licensed using Apache-2.0 license.
+
 From the abstract by the paper by Zaheer et al.(2019):
 Adaptive gradient methods that rely on scaling gradients
 down by the square root of exponential moving averages

@@ -1,4 +1,4 @@
-#' @title Adambelief optimizer
+#' @title Adabelief optimizer
 #'
 #' @name optim_adabelief
 #'
@@ -18,11 +18,11 @@
 #' This implementation is also licensed using Apache-2.0 license.
 #'
 #' From the abstract by the paper by Zhuang et al (2021):
-#' We propose AdaBelief to simultaneously achieve three goals:
+#' We propose Adabelief to simultaneously achieve three goals:
 #' fast convergence as in adaptive methods, good generalization as in SGD,
 #' and training stability. The intuition for AdaBelief is to adapt
 #' the stepsize according to the "belief" in the current gradient direction.
-#' Viewing the exponential moving average (EMA) of the noisy gradient
+#' Viewing the exponential moving average of the noisy gradient
 #' as the prediction of the gradient at the next time step,
 #' if the observed gradient greatly deviates from the prediction,
 #' we distrust the current observation and take a small step;
@@ -32,7 +32,7 @@
 #' @references
 #' Juntang Zhuang, Tommy Tang, Yifan Ding, Sekhar Tatikonda,
 #' Nicha Dvornek, Xenophon Papademetris, James S. Duncan.
-#' "AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
+#' "Adabelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
 #' 34th Conference on Neural Information Processing Systems (NeurIPS 2020),
 #' Vancouver, Canada.
 #' https://arxiv.org/abs/2010.07468
@@ -49,8 +49,8 @@
 #'                          When fixed_decay == True, weight decay is
 #'                          W_new = W_old - W_old * decay.
 #'                          When fixed_decay == False, the weight decay is
-#'                          W_new = W_old - W_old * (decay * lr).
-#'                          In this case, weight decay decreases with learning rate (lr).
+#'                          W_new = W_old - W_old * decay * learning_rate.
+#'                          In this case, weight decay decreases with learning rate.
 #' @param rectify           Perform the rectified update similar to RAdam?
 #'
 #' @returns
@@ -122,7 +122,7 @@ optim_adabelief <- torch::optimizer(
     },
     step = function(closure = NULL){
         loop_fun <- function(group, param, g, p) {
-            if (purrr::is_null(param$grad))
+            if (is.null(param$grad))
                 next
             grad <- param$grad
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/adabelief.R
 \name{optim_adabelief}
 \alias{optim_adabelief}
-\title{Adambelief optimizer}
+\title{Adabelief optimizer}
 \usage{
 optim_adabelief(
   params,
@@ -34,8 +34,8 @@ stability (default: 1e-16)}
 When fixed_decay == True, weight decay is
 W_new = W_old - W_old * decay.
 When fixed_decay == False, the weight decay is
-W_new = W_old - W_old * (decay * lr).
-In this case, weight decay decreases with learning rate (lr).}
+W_new = W_old - W_old * decay * learning_rate.
+In this case, weight decay decreases with learning rate.}
 
 \item{rectify}{Perform the rectified update similar to RAdam?}
 }
@@ -49,12 +49,15 @@ developed by the authors which is available at
 https://github.com/jettify/pytorch-optimizer.
 Thanks to Nikolay Novik of his work on python optimizers.
 
+The original implementation is licensed using the Apache-2.0 software license.
+This implementation is also licensed using Apache-2.0 license.
+
 From the abstract by the paper by Zhuang et al (2021):
-We propose AdaBelief to simultaneously achieve three goals:
+We propose Adabelief to simultaneously achieve three goals:
 fast convergence as in adaptive methods, good generalization as in SGD,
 and training stability. The intuition for AdaBelief is to adapt
 the stepsize according to the "belief" in the current gradient direction.
-Viewing the exponential moving average (EMA) of the noisy gradient
+Viewing the exponential moving average of the noisy gradient
 as the prediction of the gradient at the next time step,
 if the observed gradient greatly deviates from the prediction,
 we distrust the current observation and take a small step;
@@ -94,7 +97,7 @@ for (i in seq_len(steps)) {
 \references{
 Juntang Zhuang, Tommy Tang, Yifan Ding, Sekhar Tatikonda,
 Nicha Dvornek, Xenophon Papademetris, James S. Duncan.
-"AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
+"Adabelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
 34th Conference on Neural Information Processing Systems (NeurIPS 2020),
 Vancouver, Canada.
 https://arxiv.org/abs/2010.07468

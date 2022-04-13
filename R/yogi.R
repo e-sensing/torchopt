@@ -111,7 +111,7 @@ optim_yogi <- torch::optimizer(
     },
     step = function(closure = NULL) {
         loop_fun <- function(group, param, g, p) {
-            if (purrr::is_null(param$grad))
+            if (is.null(param$grad))
                 next
             grad <- param$grad
 

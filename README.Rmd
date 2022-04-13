@@ -177,7 +177,7 @@ https://doi.org/10.48550/arXiv.1902.09843.
 
 * Juntang Zhuang, Tommy Tang, Yifan Ding, Sekhar Tatikonda,
 Nicha Dvornek, Xenophon Papademetris, James S. Duncan.
-"AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
+"Adabelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
 34th Conference on Neural Information Processing Systems (NeurIPS 2020),
 https://arxiv.org/abs/2010.07468.
 

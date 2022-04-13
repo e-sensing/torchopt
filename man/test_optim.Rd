@@ -89,11 +89,10 @@ minimization problem by showing the convergence path using a test function.
 User can choose any test optimization
 \href{https://en.wikipedia.org/wiki/Test_functions_for_optimization}{functions}
 provided by \code{torchopt}:
-\itemize{
-\item \code{"beale"}, \code{"booth"}, \code{"bukin_n6"}, \code{"easom"}, \code{"goldstein_price"},
+
+\code{"beale"}, \code{"booth"}, \code{"bukin_n6"}, \code{"easom"}, \code{"goldstein_price"},
 \code{"himmelblau"}, \code{"levi_n13"}, \code{"matyas"}, \code{"rastrigin"},
 \code{"rosenbrock"}, and \code{"sphere"}.
-}
 
 Besides these functions, users can pass any function that receives two
 numerical values and returns a scalar.
@@ -104,14 +103,6 @@ These functions give an idea about the different situations that optimization
 algorithms can face.
 
 Function \code{test_function()} plot the 2D-space of a test optimization function.
-}
-\examples{
-# plot test function 2D-space
-test_function("rosenbrock")
-
-# plot optimization path of a initially random stating point
-test_optim(optim_madgrad)
-
 }
 \author{
 Rolf Simoes, \email{rolf.simoes@inpe.br}

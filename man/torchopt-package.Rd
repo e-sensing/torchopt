@@ -4,7 +4,7 @@
 \name{torchopt-package}
 \alias{torchopt}
 \alias{torchopt-package}
-\title{torchopt: R implementation of advanced optimizers for torch}
+\title{torchopt: R Implementation of Advanced Optimizers for Torch}
 \description{
 A set of R implementations of deep learning optimizers for torch.
 }

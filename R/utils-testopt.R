@@ -115,7 +115,7 @@ domain_sphere <- function(){
 #' [functions](https://en.wikipedia.org/wiki/Test_functions_for_optimization)
 #' provided by `torchopt`:
 #'
-#' - `"beale"`, `"booth"`, `"bukin_n6"`, `"easom"`, `"goldstein_price"`,
+#' `"beale"`, `"booth"`, `"bukin_n6"`, `"easom"`, `"goldstein_price"`,
 #' `"himmelblau"`, `"levi_n13"`, `"matyas"`, `"rastrigin"`,
 #' `"rosenbrock"`, and `"sphere"`.
 #'
@@ -149,12 +149,6 @@ domain_sphere <- function(){
 #' @param ct_color       Contour color (default `"#FFFFFF7F"`)
 #' @param plot_each_step Should output each step? (default `FALSE`)
 #'
-#' @examples
-#' # plot test function 2D-space
-#' test_function("rosenbrock")
-#'
-#' # plot optimization path of a initially random stating point
-#' test_optim(optim_madgrad)
 #'
 NULL
 

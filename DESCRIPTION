@@ -1,6 +1,6 @@
 Type: Package
 Package: torchopt
-Title: R implementation of advanced optimizers for torch
+Title: R Implementation of Advanced Optimizers for Torch
 Version: 0.1.0
 Authors@R: c(
     person("Gilberto", "Camara", , "gilberto.camara@inpe.br", role = c("aut", "cre")),
@@ -9,21 +9,22 @@ Authors@R: c(
     person("Alber", "Sanchez", , "alber.ipia@inpe.br", role = "aut")
   )
 Maintainer: Gilberto Camara <gilberto.camara@inpe.br>
-Description: A set of R implementations of deep learning optimizers for torch.
-License: Apache License (>= 2) | file LICENSE
-Encoding: UTF-8
-ByteCompile: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+Description: A set of R implementations of deep learning optimizers for
+    torch.
+License: Apache License (>= 2)
 URL: https://github.com/e-sensing/torchopt/
-Depends: R (>= 4.1.0)
+Depends: 
+    R (>= 4.1.0)
 Imports:
     graphics,
     grDevices,
+    rlang,
     stats,
     torch
 Suggests:
-    covr,
-    gifski,
     testthat
+ByteCompile: true
+Encoding: UTF-8
 Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2

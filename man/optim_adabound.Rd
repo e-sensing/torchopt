@@ -37,8 +37,12 @@ A torch optimizer object implementing the \code{step} method.
 }
 \description{
 R implementation of the AdaBound optimizer proposed
-by Luo et al.(2019). The original implementation is available at
-https://github.com/Luolc/AdaBound.
+by Luo et al.(2019). We used the implementation available at
+https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py.
+Thanks to Nikolay Novik for providing the pytorch code.
+
+The original implementation is licensed using the Apache-2.0 software license.
+This implementation is also licensed using Apache-2.0 license.
 
 AdaBound is a variant of the Adam stochastic optimizer which is
 designed to be more robust to extreme learning rates.
