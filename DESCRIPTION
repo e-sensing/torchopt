@@ -14,7 +14,7 @@ Description: A set of R implementations of deep learning optimizers for
 License: Apache License (>= 2)
 URL: https://github.com/e-sensing/torchopt/
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.0.0)
 Imports:
     graphics,
     grDevices,
