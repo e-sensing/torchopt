@@ -58,9 +58,7 @@ available at <https://github.com/jettify/pytorch-optimizer/blob/master/torch_opt
 
 You can also test optimizers using optimization [test functions](https://en.wikipedia.org/wiki/Test_functions_for_optimization) provided by `torchopt` including `"ackley"`, `"beale"`, `"booth"`, `"bukin_n6"`, `"easom"`, `"goldstein_price"`, `"himmelblau"`, `"levi_n13"`, `"matyas"`, `"rastrigin"`, `"rosenbrock"`, `"sphere"`. Optimization functions are useful to evaluate characteristics of optimization algorithms, such as convergence rate, precision, robustness, and performance. These functions give an idea about the different situations that optimization algorithms can face. 
 
-In what follows, we perform tests using `""goldstein_price""` test function. Each test runs 200 optimization steps. The learning rate hyper-parameter is set to `lr=0.5`. To
-visualize an animated GIF, we set `plot_each_step=TRUE` and capture each step
-frame using [gifski](https://CRAN.R-project.org/package=gifski) package.
+In what follows, we perform tests using `"beale"` test function. To visualize an animated GIF, we set `plot_each_step=TRUE` and capture each step frame using [gifski](https://CRAN.R-project.org/package=gifski) package.
 
 ### `optim_adamw()`:
 

@@ -15,7 +15,7 @@ in the literature to be available in R language for torch.
 
 ## Installation
 
-You can install the development version of `torchopt` like so:
+To install the development version of `torchopt` do as :
 
 ``` r
 # library(devtools)
@@ -24,7 +24,7 @@ install_github("e-sensing/torchopt)
 
 ## Provided optimizers
 
-`torchopt` package provides the following R implementation of torch
+`torchopt` package provides the following R implementations of torch
 optimizers:
 
 -   `optim_adamw()`: AdamW optimizer proposed by Loshchilov & Hutter
@@ -63,11 +63,10 @@ optimization algorithms, such as convergence rate, precision,
 robustness, and performance. These functions give an idea about the
 different situations that optimization algorithms can face.
 
-In what follows, we perform tests using `""goldstein_price""` test
-function. Each test runs 200 optimization steps. The learning rate
-hyper-parameter is set to `lr=0.5`. To visualize an animated GIF, we set
-`plot_each_step=TRUE` and capture each step frame using
-[gifski](https://CRAN.R-project.org/package=gifski) package.
+In what follows, we perform tests using `"beale"` test function. To
+visualize an animated GIF, we set `plot_each_step=TRUE` and capture each
+step frame using [gifski](https://CRAN.R-project.org/package=gifski)
+package.
 
 ### `optim_adamw()`:
 
@@ -181,7 +180,7 @@ By contributing to this project, you agree to abide by its terms.
     <https://doi.org/10.48550/arXiv.1902.09843>.
 
 -   Juntang Zhuang, Tommy Tang, Yifan Ding, Sekhar Tatikonda, Nicha
-    Dvornek, Xenophon Papademetris, James S. Duncan. “AdaBelief
+    Dvornek, Xenophon Papademetris, James S. Duncan. “Adabelief
     Optimizer: Adapting Stepsizes by the Belief in Observed Gradients”,
     34th Conference on Neural Information Processing Systems (NeurIPS
     2020), <https://arxiv.org/abs/2010.07468>.
