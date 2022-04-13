@@ -1,3 +1,7 @@
 library(testthat)
 library(torchopt)
-test_check("torchopt")
+
+if (Sys.getenv("TORCH_TEST", unset = 0) == 1) {
+    test_check("torchopt")
+}
+
