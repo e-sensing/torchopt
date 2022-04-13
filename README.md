@@ -5,9 +5,13 @@
 
 <!-- badges: start -->
 
-[![Codecov test
-coverage](https://codecov.io/gh/e-sensing/torchopt/branch/main/graph/badge.svg)](https://app.codecov.io/gh/e-sensing/torchopt?branch=main)
 [![R-CMD-check](https://github.com/e-sensing/torchopt/workflows/R-CMD-check/badge.svg)](https://github.com/e-sensing/torchopt/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/torchopt)](https://cran.r-project.org/package=torchopt)
+[![Software Life
+Cycle](https://img.shields.io/badge/lifecycle-experimental-yellow.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Software
+License](https://img.shields.io/badge/license-Apache%202-2--green)](https://www.apache.org/licenses/LICENSE-2.0)
 <!-- badges: end -->
 
 The goal of `torchopt` is to provide deep learning optimizers proposed

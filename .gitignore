@@ -40,3 +40,7 @@ README_files/*
 
 # R Environment Variables
 .Renviron
+
+# CRAN comments
+cran-comments.md
+CRAN-SUBMISSION
