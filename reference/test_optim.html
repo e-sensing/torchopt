@@ -7,8 +7,6 @@ provided by torchopt:
 "beale", "booth", "bukin_n6", "easom", "goldstein_price",
 "himmelblau", "levi_n13", "matyas", "rastrigin",
 "rosenbrock", and "sphere".
-
-
 Besides these functions, users can pass any function that receives two
 numerical values and returns a scalar.
 Optimization functions are useful to evaluate characteristics of optimization
@@ -66,10 +64,11 @@ Function test_function() plot the 2D-space of a test optimization function.'><!-
 minimization problem by showing the convergence path using a test function.
 User can choose any test optimization
 <a href="https://en.wikipedia.org/wiki/Test_functions_for_optimization" class="external-link">functions</a>
-provided by <code>torchopt</code>:</p><ul><li><p><code>"beale"</code>, <code>"booth"</code>, <code>"bukin_n6"</code>, <code>"easom"</code>, <code>"goldstein_price"</code>,
+provided by <code>torchopt</code>:</p>
+<p><code>"beale"</code>, <code>"booth"</code>, <code>"bukin_n6"</code>, <code>"easom"</code>, <code>"goldstein_price"</code>,
 <code>"himmelblau"</code>, <code>"levi_n13"</code>, <code>"matyas"</code>, <code>"rastrigin"</code>,
-<code>"rosenbrock"</code>, and <code>"sphere"</code>.</p></li>
-</ul><p>Besides these functions, users can pass any function that receives two
+<code>"rosenbrock"</code>, and <code>"sphere"</code>.</p>
+<p>Besides these functions, users can pass any function that receives two
 numerical values and returns a scalar.</p>
 <p>Optimization functions are useful to evaluate characteristics of optimization
 algorithms, such as convergence rate, precision, robustness, and performance.
@@ -164,18 +163,6 @@ algorithms can face.</p>
     <p>Rolf Simoes, <a href="mailto:rolf.simoes@inpe.br">rolf.simoes@inpe.br</a></p>
     </div>
 
-    <div id="ref-examples">
-    <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># plot test function 2D-space</span></span>
-<span class="r-in"><span class="fu">test_function</span><span class="op">(</span><span class="st">"rosenbrock"</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="test_optim-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># plot optimization path of a initially random stating point</span></span>
-<span class="r-in"><span class="fu">test_optim</span><span class="op">(</span><span class="va">optim_madgrad</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in torch_tensor_cpp(data, dtype, device, requires_grad, pin_memory):</span> Lantern is not loaded. Please use `install_torch()` to install additional dependencies.</span>
-<span class="r-in"></span>
-</code></pre></div>
-    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
