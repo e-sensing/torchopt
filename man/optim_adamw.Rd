@@ -46,6 +46,7 @@ weight decay regularization by decoupling the weight decay from the optimization
 steps taken w.r.t. the loss function
 }
 \examples{
+\dontrun{
 if (torch::torch_is_installed()) {
 library(torch)
 # define test function
@@ -71,6 +72,7 @@ for (i in seq_len(steps)) {
      z <- test_matyas(x, y)
      z$backward()
      optim$step()
+}
 }
 }
 }

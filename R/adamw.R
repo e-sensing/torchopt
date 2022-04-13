@@ -42,6 +42,7 @@
 #' A torch optimizer object implementing the `step` method.
 #'
 #' @examples
+#' \dontrun{
 #' if (torch::torch_is_installed()) {
 #' library(torch)
 #' # define test function
@@ -67,6 +68,7 @@
 #'      z <- test_matyas(x, y)
 #'      z$backward()
 #'      optim$step()
+#' }
 #' }
 #' }
 #' @export

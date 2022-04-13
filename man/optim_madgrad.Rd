@@ -38,6 +38,7 @@ On sparse problems both weight_decay and momentum should be set to 0.
 (not yet supported in the R implementation).
 }
 \examples{
+\dontrun{
 if (torch::torch_is_installed()) {
 library(torch)
 # define test function
@@ -65,7 +66,7 @@ for (i in seq_len(steps)) {
      optim$step()
 }
 }
-
+}
 }
 \references{
 Aaron Defazio, Samy Jelassi,

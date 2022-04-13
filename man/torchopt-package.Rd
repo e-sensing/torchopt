@@ -21,6 +21,7 @@ Useful links:
 Authors:
 \itemize{
   \item Rolf Simoes \email{rolf.simoes@inpe.br}
+  \item Daniel Falbel \email{daniel.falbel@gmail.com}
   \item Felipe Souza \email{felipe.carvalho@inpe.br}
   \item Alber Sanchez \email{alber.ipia@inpe.br}
 }

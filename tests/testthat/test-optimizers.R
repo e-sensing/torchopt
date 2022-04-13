@@ -1,6 +1,7 @@
 library(torchopt)
 euc.dist <- function(x1, x2) sqrt(sum((x1 - x2) ^ 2))
 test_that("adamw optimizer", {
+    testthat::skip_on_cran()
     set.seed(12345)
     xy <- torchopt::test_optim_valid(
         optim = torchopt::optim_adamw,
@@ -16,10 +17,10 @@ test_that("adamw optimizer", {
     diff1 <- euc.dist(xy_opt, xy_200)
 
     expect_true(diff1 < diff0)
-
 })
 
 test_that("adabelief optimizer", {
+    testthat::skip_on_cran()
     set.seed(42)
     xy <- test_optim_valid(
         optim = optim_adabelief,
@@ -39,6 +40,7 @@ test_that("adabelief optimizer", {
 })
 
 test_that("adabound optimizer", {
+    testthat::skip_on_cran()
     set.seed(22)
     xy <- test_optim_valid(
         optim = optim_adabound,
@@ -57,6 +59,7 @@ test_that("adabound optimizer", {
 
 })
 test_that("madgrad optimizer", {
+    testthat::skip_on_cran()
     set.seed(256)
     xy <- test_optim_valid(
         optim = optim_madgrad,
@@ -75,6 +78,7 @@ test_that("madgrad optimizer", {
 
 })
 test_that("yogi optimizer", {
+    testthat::skip_on_cran()
     set.seed(66)
     xy <- test_optim_valid(
         optim = optim_yogi,

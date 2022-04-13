@@ -57,6 +57,7 @@
 #' A torch optimizer object implementing the `step` method.
 #'
 #' @examples
+#' \dontrun{
 #' if (torch::torch_is_installed()) {
 #' library(torch)
 #' # define test function
@@ -84,7 +85,7 @@
 #'      optim$step()
 #' }
 #' }
-#'
+#' }
 #' @export
 optim_adabelief <- torch::optimizer(
     classname = "optim_adabelief",

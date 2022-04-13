@@ -54,6 +54,7 @@ method at the beginning of training, and thereafter it gradually and
 smoothly transforms to SGD (or with momentum) as the time step increases.
 }
 \examples{
+\dontrun{
 if (torch::torch_is_installed()) {
 library(torch)
 # define test function
@@ -79,6 +80,7 @@ for (i in seq_len(steps)) {
      z <- test_matyas(x, y)
      z$backward()
      optim$step()
+}
 }
 }
 }

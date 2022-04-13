@@ -5,6 +5,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Gilberto", "Camara", , "gilberto.camara@inpe.br", role = c("aut", "cre")),
     person("Rolf", "Simoes", , "rolf.simoes@inpe.br", role = "aut"),
+    person("Daniel", "Falbel", , "daniel.falbel@gmail.com", role = "aut"),
     person("Felipe", "Souza", , "felipe.carvalho@inpe.br", role = "aut"),
     person("Alber", "Sanchez", , "alber.ipia@inpe.br", role = "aut")
   )
@@ -18,7 +19,6 @@ Depends:
 Imports:
     graphics,
     grDevices,
-    rlang,
     stats,
     torch
 Suggests:

@@ -65,6 +65,7 @@ if the observed gradient is close to the prediction,
 we trust it and take a large step.
 }
 \examples{
+\dontrun{
 if (torch::torch_is_installed()) {
 library(torch)
 # define test function
@@ -92,7 +93,7 @@ for (i in seq_len(steps)) {
      optim$step()
 }
 }
-
+}
 }
 \references{
 Juntang Zhuang, Tommy Tang, Yifan Ding, Sekhar Tatikonda,

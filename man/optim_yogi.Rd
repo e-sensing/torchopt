@@ -57,6 +57,7 @@ Yogi with very little hyperparameter tuning outperforms
 methods such as Adam in several challenging machine learning tasks.
 }
 \examples{
+\dontrun{
 if (torch::torch_is_installed()) {
 library(torch)
 # define test function
@@ -84,7 +85,7 @@ for (i in seq_len(steps)) {
      optim$step()
 }
 }
-
+}
 }
 \references{
 Manzil Zaheer, Sashank Reddi, Devendra Sachan, Satyen Kale, Sanjiv Kumar,

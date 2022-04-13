@@ -36,6 +36,7 @@
 #'                      (default: 1e-6).
 #'
 #' @examples
+#' \dontrun{
 #' if (torch::torch_is_installed()) {
 #' library(torch)
 #' # define test function
@@ -63,7 +64,7 @@
 #'      optim$step()
 #' }
 #' }
-#'
+#' }
 #' @returns
 #' A torch optimizer object implementing the `step` method.
 #'
@@ -76,16 +77,16 @@ optim_madgrad <- torch::optimizer(
                           eps = 1e-6) {
 
         if (momentum < 0 || momentum >= 1)
-            rlang::abort("Momentum must be in the range [0,1].")
+            stop("Momentum must be in the range [0,1].")
 
         if (lr <= 0)
-            rlang::abort("Learning rate must be positive.")
+            stop("Learning rate must be positive.")
 
         if (weight_decay < 0)
-            rlang::abort("Weight decay must be non-negative.")
+            stop("Weight decay must be non-negative.")
 
         if (eps < 0)
-            rlang::abort("Eps must be non-negative.")
+            stop("Eps must be non-negative.")
 
         defaults <- list(lr = lr,
                          eps = eps,
