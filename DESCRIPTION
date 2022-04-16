@@ -1,7 +1,7 @@
 Type: Package
 Package: torchopt
 Title: R Implementation of Advanced Optimizers for Torch
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Gilberto", "Camara", , "gilberto.camara@inpe.br", role = c("aut", "cre")),
     person("Rolf", "Simoes", , "rolf.simoes@inpe.br", role = "aut"),

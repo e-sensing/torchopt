@@ -102,7 +102,22 @@ test_that("radam optimizer", {
     testthat::skip_on_cran()
     set.seed(12345)
     xy <- test_optim_valid(
-        optim = optim_nadam,
+        optim = optim_radam,
+        opt_hparams = list(lr = 0.1),
+        steps = 400,
+        test_fn = "beale"
+    )
+    test_fn0 <- beale(xy[[1]][1], xy[[2]][1])
+    test_fn400 <- beale(xy[[1]][400], xy[[2]][400])
+
+    expect_true(test_fn0 > test_fn400)
+
+})
+test_that("swats optimizer", {
+    testthat::skip_on_cran()
+    set.seed(234)
+    xy <- test_optim_valid(
+        optim = optim_swats,
         opt_hparams = list(lr = 0.1),
         steps = 400,
         test_fn = "beale"

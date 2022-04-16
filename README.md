@@ -15,8 +15,9 @@ License](https://img.shields.io/badge/license-Apache%202-2--green)](https://www.
 
 <!-- badges: end -->
 
-The goal of `torchopt` is to provide deep learning optimizers proposed
-in the literature to be available in R language for torch.
+The `torchopt` package provides R implementation of deep learning
+optimizers proposed in the literature. It is intended to support the use
+of the torch package in R.
 
 ## Installation
 
@@ -38,11 +39,11 @@ optimizers:
     <https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3>
 
 -   `optim_adabelief()`: Adabelief optimizer proposed by Zhuang et al
-    (2020). Converted from the implementation is available at
+    (2020). Converted from the authors’ PyTorch code:
     <https://github.com/juntang-zhuang/Adabelief-Optimizer>.
 
 -   `optim_adabound()`: Adabound optimizer proposed by Luo et al.(2019).
-    Converted from the implementation is available at
+    Converted from the authors’ PyTorch code:
     <https://github.com/Luolc/AdaBound>.
 
 -   `optim_madgrad()`: Momentumized, Adaptive, Dual Averaged Gradient
@@ -51,22 +52,25 @@ optimizers:
     [madgrad](https://CRAN.R-project.org/package=madgrad) package and
     the source code is available at <https://github.com/mlverse/madgrad>
 
--   `optim_nadam()`: Incorportation of Nesterov Momentum into Adam
-    proposed by Dozat (2016). Converted from the PyTorch code
+-   `optim_nadam()`: Incorporation of Nesterov Momentum into Adam
+    proposed by Dozat (2016). Converted from the PyTorch site
     <https://github.com/pytorch/pytorch>.
 
 -   `optim_qhadam()`: Quasi-hyperbolic version of Adam proposed by Ma
-    and Yarats(2019). Converted from
+    and Yarats(2019). Converted from the code developed by Meta AI:
     <https://github.com/facebookresearch/qhoptim>.
 
 -   `optim_radam()`: Rectified verison of Adam proposed by Liu et al.
     (2019). Converted from the PyTorch code
     <https://github.com/pytorch/pytorch>.
 
--   `optim_yogi()`: Yogi optimizer proposed by Zaheer et al.(2019). We
-    ported it from the `pytorch` code developed by Nikolay Novik
-    available at
-    <https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py>
+-   `optim_swats()`: Optimizer that switches from Adam to SGD proposed
+    by Keskar and Socher(2018). Converted from the `pytorch` code
+    developed by Patrik Purgai: <https://github.com/Mrpatekful/swats>
+
+-   `optim_yogi()`: Yogi optimizer proposed by Zaheer et al.(2019).
+    Converted from the `pytorch` code developed by Nikolay Novik:
+    <https://github.com/jettify/pytorch-optimizer>
 
 ## Optimization test functions
 
@@ -162,6 +166,21 @@ test_optim(
 
 <img src="man/figures/README-test_nadam-.gif" width="50%" height="50%" />
 
+### `optim_qhadam()`:
+
+``` r
+set.seed(1024)
+test_optim(
+    optim = optim_qhadam,
+    opt_hparams = list(lr = 0.1),
+    steps = 400,
+    test_fn = "beale",
+    plot_each_step = TRUE
+)
+```
+
+<img src="man/figures/README-test_qhadam-.gif" width="50%" height="50%" />
+
 ### `optim_radam()`:
 
 ``` r
@@ -177,20 +196,20 @@ test_optim(
 
 <img src="man/figures/README-test_radam-.gif" width="50%" height="50%" />
 
-### `optim_qhadam()`:
+### `optim_swats()`:
 
 ``` r
-set.seed(1024)
+set.seed(234)
 test_optim(
-    optim = optim_qhadam,
-    opt_hparams = list(lr = 0.1),
+    optim = optim_swats,
+    opt_hparams = list(lr = 1.0),
     steps = 400,
     test_fn = "beale",
     plot_each_step = TRUE
 )
 ```
 
-<img src="man/figures/README-test_qhadam-.gif" width="50%" height="50%" />
+<img src="man/figures/README-test_swats-.gif" width="50%" height="50%" />
 
 ### `optim_yogi()`:
 
@@ -211,12 +230,15 @@ test_optim(
 ## Acknowledgements
 
 We are thankful to Collin Donahue-Oponski <https://github.com/colllin>,
-Nikolay Novik <https://github.com/jettify>, Liangchen Luo
-<https://github.com/Luolc>, Liyuan Liu
-<https://github.com/LiyuanLucasLiu>, and Juntang Zhuang
-<https://github.com/juntang-zhuang> for providing pytorch code. We also
-thank Daniel Falbel <https://github.com/dfalbel> for providing support
-for the R version of PyTorch.
+Liangchen Luo <https://github.com/Luolc>, Liyuan Liu
+<https://github.com/LiyuanLucasLiu>, Nikolay Novik
+<https://github.com/jettify>, Patrik Purgai
+<https://github.com/Mrpatekful> Juntang Zhuang
+<https://github.com/juntang-zhuang> and the PyTorch team
+<https://github.com/pytorch/pytorch> for providing pytorch code for the
+optimizers implemented in this package. We also thank Daniel Falbel
+<https://github.com/dfalbel> for providing support for the R version of
+PyTorch.
 
 ## Code of Conduct
 
@@ -260,4 +282,7 @@ By contributing to this project, you agree to abide by its terms.
 
 -   Timothy Dazat, “Incorporating Nesterov Momentum into Adam”,
     International Conference on Learning Representations (ICLR), 2019.
-    <https://openreview.net/pdf/OM0jvwB8jIp57ZJjtNEZ.pdf>
+
+-   Nitish Keskar, Richard Socher, “Improving Generalization Performance
+    by Switching from Adam to SGD”. International Conference on Learning
+    Representations (ICLR), 2018. <https://arxiv.org/abs/1712.07628>.
