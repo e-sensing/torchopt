@@ -71,23 +71,28 @@
 </h1></div>
 <!-- badges: start -->
 
+<!-- badges: end -->
 <p>The goal of <code>torchopt</code> is to provide deep learning optimizers proposed in the literature to be available in R language for torch.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>To install the development version of <code>torchopt</code> do as :</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># library(devtools)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">install_github</span>(<span class="st">"e-sensing/torchopt)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
+<span class="fu">install_github</span><span class="op">(</span><span class="st">"e-sensing/torchopt"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="provided-optimizers">Provided optimizers<a class="anchor" aria-label="anchor" href="#provided-optimizers"></a>
 </h2>
 <p><code>torchopt</code> package provides the following R implementations of torch optimizers:</p>
 <ul>
-<li><p><code><a href="reference/optim_adamw.html">optim_adamw()</a></code>: AdamW optimizer proposed by Loshchilov &amp; Hutter (2019). We ported it from the <code>pytorch</code> code developed by Collin Donahue-Oponski available at <a href="https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3" class="external-link uri">https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3</a></p></li>
-<li><p><code><a href="reference/optim_adabelief.html">optim_adabelief()</a></code>: Adabelief optimizer proposed by Zhuang et al (2020). The original implementation is available at <a href="https://github.com/juntang-zhuang/Adabelief-Optimizer" class="external-link uri">https://github.com/juntang-zhuang/Adabelief-Optimizer</a>.</p></li>
-<li><p><code><a href="reference/optim_adabound.html">optim_adabound()</a></code>: Adabound optimizer proposed by Luo et al.(2019). The original implementation is available at <a href="https://github.com/Luolc/AdaBound" class="external-link uri">https://github.com/Luolc/AdaBound</a>.</p></li>
+<li><p><code><a href="reference/optim_adamw.html">optim_adamw()</a></code>: AdamW optimizer proposed by Loshchilov &amp; Hutter (2019). Converted from the <code>pytorch</code> code developed by Collin Donahue-Oponski available at <a href="https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3" class="external-link uri">https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3</a></p></li>
+<li><p><code><a href="reference/optim_adabelief.html">optim_adabelief()</a></code>: Adabelief optimizer proposed by Zhuang et al (2020). Converted from the implementation is available at <a href="https://github.com/juntang-zhuang/Adabelief-Optimizer" class="external-link uri">https://github.com/juntang-zhuang/Adabelief-Optimizer</a>.</p></li>
+<li><p><code><a href="reference/optim_adabound.html">optim_adabound()</a></code>: Adabound optimizer proposed by Luo et al.(2019). Converted from the implementation is available at <a href="https://github.com/Luolc/AdaBound" class="external-link uri">https://github.com/Luolc/AdaBound</a>.</p></li>
 <li><p><code><a href="reference/optim_madgrad.html">optim_madgrad()</a></code>: Momentumized, Adaptive, Dual Averaged Gradient Method for Stochastic Optimization (MADGRAD) optimizer proposed by Defazio &amp; Jelassi (2021). The function is imported from <a href="https://CRAN.R-project.org/package=madgrad" class="external-link">madgrad</a> package and the source code is available at <a href="https://github.com/mlverse/madgrad" class="external-link uri">https://github.com/mlverse/madgrad</a></p></li>
+<li><p><code><a href="reference/optim_nadam.html">optim_nadam()</a></code>: Incorportation of Nesterov Momentum into Adam proposed by Dozat (2016). Converted from the PyTorch code <a href="https://github.com/pytorch/pytorch" class="external-link uri">https://github.com/pytorch/pytorch</a>.</p></li>
+<li><p><code><a href="reference/optim_qhadam.html">optim_qhadam()</a></code>: Quasi-hyperbolic version of Adam proposed by Ma and Yarats(2019). Converted from <a href="https://github.com/facebookresearch/qhoptim" class="external-link uri">https://github.com/facebookresearch/qhoptim</a>.</p></li>
+<li><p><code><a href="reference/optim_radam.html">optim_radam()</a></code>: Rectified verison of Adam proposed by Liu et al. (2019). Converted from the PyTorch code <a href="https://github.com/pytorch/pytorch" class="external-link uri">https://github.com/pytorch/pytorch</a>.</p></li>
 <li><p><code><a href="reference/optim_yogi.html">optim_yogi()</a></code>: Yogi optimizer proposed by Zaheer et al.(2019). We ported it from the <code>pytorch</code> code developed by Nikolay Novik available at <a href="https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py" class="external-link uri">https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py</a></p></li>
 </ul>
 </div>
@@ -103,8 +108,8 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># test optim adamw</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span>
-<span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
-    optim <span class="op">=</span> <span class="va">optim_adamw</span>,
+<span class="fu">torchopt</span><span class="fu">::</span><span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
+    optim <span class="op">=</span> <span class="fu">torchopt</span><span class="fu">::</span><span class="va"><a href="reference/optim_adamw.html">optim_adamw</a></span>,
     test_fn <span class="op">=</span> <span class="st">"beale"</span>,
     opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>,
     steps <span class="op">=</span> <span class="fl">400</span>,
@@ -159,10 +164,55 @@
 <p><img src="reference/figures/README-test_madgrad-.gif" width="50%" height="50%"></p>
 </div>
 <div class="section level3">
+<h3 id="optim_nadam">
+<code>optim_nadam()</code>:<a class="anchor" aria-label="anchor" href="#optim_nadam"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2903</span><span class="op">)</span>
+<span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
+    optim <span class="op">=</span> <span class="va">optim_nadam</span>,
+    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.3</span>, weight_decay <span class="op">=</span> <span class="fl">1.0e-06</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
+    test_fn <span class="op">=</span> <span class="st">"beale"</span>,
+    plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-test_nadam-.gif" width="50%" height="50%"></p>
+</div>
+<div class="section level3">
+<h3 id="optim_radam">
+<code>optim_radam()</code>:<a class="anchor" aria-label="anchor" href="#optim_radam"></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1024</span><span class="op">)</span>
+<span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
+    optim <span class="op">=</span> <span class="va">optim_radam</span>,
+    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
+    test_fn <span class="op">=</span> <span class="st">"beale"</span>,
+    plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-test_radam-.gif" width="50%" height="50%"></p>
+</div>
+<div class="section level3">
+<h3 id="optim_qhadam">
+<code>optim_qhadam()</code>:<a class="anchor" aria-label="anchor" href="#optim_qhadam"></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1024</span><span class="op">)</span>
+<span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
+    optim <span class="op">=</span> <span class="va">optim_qhadam</span>,
+    opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+    steps <span class="op">=</span> <span class="fl">400</span>,
+    test_fn <span class="op">=</span> <span class="st">"beale"</span>,
+    plot_each_step <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-test_qhadam-.gif" width="50%" height="50%"></p>
+</div>
+<div class="section level3">
 <h3 id="optim_yogi">
 <code>optim_yogi()</code>:<a class="anchor" aria-label="anchor" href="#optim_yogi"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># set manual seed</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">66</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
@@ -178,7 +228,7 @@
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
-<p>We are thankful to Collin Donahue-Oponski <a href="https://github.com/colllin" class="external-link uri">https://github.com/colllin</a>, Nikolay Novik <a href="https://github.com/jettify" class="external-link uri">https://github.com/jettify</a>, Liangchen Luo <a href="https://github.com/Luolc" class="external-link uri">https://github.com/Luolc</a>, and Juntang Zhuang<a href="https://github.com/juntang-zhuang" class="external-link uri">https://github.com/juntang-zhuang</a> for providing pytorch code; and Daniel Falbel <a href="https://github.com/dfalbel" class="external-link uri">https://github.com/dfalbel</a> for providing examples of torch code in R.</p>
+<p>We are thankful to Collin Donahue-Oponski <a href="https://github.com/colllin" class="external-link uri">https://github.com/colllin</a>, Nikolay Novik <a href="https://github.com/jettify" class="external-link uri">https://github.com/jettify</a>, Liangchen Luo <a href="https://github.com/Luolc" class="external-link uri">https://github.com/Luolc</a>, Liyuan Liu <a href="https://github.com/LiyuanLucasLiu" class="external-link uri">https://github.com/LiyuanLucasLiu</a>, and Juntang Zhuang <a href="https://github.com/juntang-zhuang" class="external-link uri">https://github.com/juntang-zhuang</a> for providing pytorch code. We also thank Daniel Falbel <a href="https://github.com/dfalbel" class="external-link uri">https://github.com/dfalbel</a> for providing support for the R version of PyTorch.</p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
@@ -194,6 +244,8 @@
 <li><p>Liangchen Luo, Yuanhao Xiong, Yan Liu, Xu Sun, “Adaptive Gradient Methods with Dynamic Bound of Learning Rate”, International Conference on Learning Representations (ICLR), 2019. <a href="https://doi.org/10.48550/arXiv.1902.09843" class="external-link uri">https://doi.org/10.48550/arXiv.1902.09843</a>.</p></li>
 <li><p>Juntang Zhuang, Tommy Tang, Yifan Ding, Sekhar Tatikonda, Nicha Dvornek, Xenophon Papademetris, James S. Duncan. “Adabelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients”, 34th Conference on Neural Information Processing Systems (NeurIPS 2020), <a href="https://arxiv.org/abs/2010.07468" class="external-link uri">https://arxiv.org/abs/2010.07468</a>.</p></li>
 <li><p>Aaron Defazio, Samy Jelassi, “Adaptivity without Compromise: A Momentumized, Adaptive, Dual Averaged Gradient Method for Stochastic Optimization”, arXiv preprint arXiv:2101.11075, 2021. <a href="https://doi.org/10.48550/arXiv.2101.11075" class="external-link uri">https://doi.org/10.48550/arXiv.2101.11075</a></p></li>
+<li><p>Liyuan Liu, Haoming Jiang, Pengcheng He, Weizhu Chen, Xiaodong Liu, Jianfeng Gao, Jiawei Han, “On the Variance of the Adaptive Learning Rate and Beyond”, International Conference on Learning Representations (ICLR) 2020. <a href="https://arxiv.org/abs/1908.03265" class="external-link uri">https://arxiv.org/abs/1908.03265</a>.</p></li>
+<li><p>Timothy Dazat, “Incorporating Nesterov Momentum into Adam”, International Conference on Learning Representations (ICLR), 2019. <a href="https://openreview.net/pdf/OM0jvwB8jIp57ZJjtNEZ.pdf" class="external-link uri">https://openreview.net/pdf/OM0jvwB8jIp57ZJjtNEZ.pdf</a></p></li>
 </ul>
 </div>
 </div>
@@ -244,7 +296,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/e-sensing/torchopt/actions" class="external-link"><img src="https://github.com/e-sensing/torchopt/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://cran.r-project.org/package=torchopt" class="external-link"><img src="https://www.r-pkg.org/badges/version/torchopt" alt="CRAN status"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-yellow.svg" alt="Software Life Cycle"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-yellow.svg" alt="Software Life Cycle"></a></li>
 <li><a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link"><img src="https://img.shields.io/badge/license-Apache%202-2--green" alt="Software License"></a></li>
 </ul>
 </div>

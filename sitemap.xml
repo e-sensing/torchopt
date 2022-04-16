@@ -31,6 +31,15 @@
     <loc>/reference/optim_madgrad.html</loc>
   </url>
   <url>
+    <loc>/reference/optim_nadam.html</loc>
+  </url>
+  <url>
+    <loc>/reference/optim_qhadam.html</loc>
+  </url>
+  <url>
+    <loc>/reference/optim_radam.html</loc>
+  </url>
+  <url>
     <loc>/reference/optim_yogi.html</loc>
   </url>
   <url>

@@ -138,39 +138,6 @@ https://papers.nips.cc/paper/8186-adaptive-methods-for-nonconvex-optimization</p
 <p>Alber Sanchez, <a href="mailto:alber.ipia@inpe.br">alber.ipia@inpe.br</a></p>
     </div>
 
-    <div id="ref-examples">
-    <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/torch/man/torch_is_installed.html" class="external-link">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># define test function</span></span>
-<span class="r-in"><span class="va">test_matyas</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">0.26</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">y</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0.48</span> <span class="op">*</span> <span class="va">x</span> <span class="op">*</span> <span class="va">y</span><span class="op">)</span><span class="op">}</span></span>
-<span class="r-in"><span class="co"># define starting point</span></span>
-<span class="r-in"><span class="va">x0</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">5</span></span>
-<span class="r-in"><span class="va">y0</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">5</span></span>
-<span class="r-in"><span class="co"># create tensor</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/torch/man/torch_tensor.html" class="external-link">torch_tensor</a></span><span class="op">(</span><span class="va">x0</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/torch/man/torch_tensor.html" class="external-link">torch_tensor</a></span><span class="op">(</span><span class="va">y0</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># define optimizer</span></span>
-<span class="r-in"><span class="va">optim</span> <span class="op">&lt;-</span> <span class="va">optim_yogi</span></span>
-<span class="r-in"><span class="va">opt_hparams</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">optim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">optim</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>, <span class="va">opt_hparams</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># run optimizer</span></span>
-<span class="r-in"><span class="va">steps</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
-<span class="r-in"><span class="va">x_steps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="va">steps</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y_steps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="va">steps</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">steps</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">     <span class="va">x_steps</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in">     <span class="va">y_steps</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
-<span class="r-in">     <span class="va">optim</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">     <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu">test_matyas</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
-<span class="r-in">     <span class="va">z</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">     <span class="va">optim</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
-</code></pre></div>
-    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
