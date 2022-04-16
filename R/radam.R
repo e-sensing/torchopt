@@ -1,34 +1,40 @@
 #' @title AdamW optimizer
 #'
-#' @name optim_adamw
+#' @name optim_radam
 #'
 #' @author Gilberto Camara, \email{gilberto.camara@@inpe.br}
+#' @author Daniel Falbel, \email{daniel.falble@@gmail.com}
 #' @author Rolf Simoes, \email{rolf.simoes@@inpe.br}
 #' @author Felipe Souza, \email{lipecaso@@gmail.com}
 #' @author Alber Sanchez, \email{alber.ipia@@inpe.br}
 #'
 #' @description
-#' R implementation of the AdamW optimizer proposed
-#' by Loshchilov & Hutter (2019). We used the pytorch implementation
-#' developed by Collin Donahue-Oponski available at:
-#' https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3
+#' R implementation of the RAdam optimizer proposed
+#' by Liu et al. (2019).
+#' We used the implementation in PyTorch as a basis for our
+#' implementation.
 #'
-#' From the abstract by the paper by Loshchilov & Hutter (2019):
-#' L2 regularization and weight decay regularization are equivalent for standard
-#' stochastic gradient descent (when rescaled by the learning rate),
-#' but as we demonstrate this is not the case for adaptive gradient algorithms,
-#' such as Adam. While common implementations of these algorithms
-#' employ L2 regularization (often calling it “weight decay”
-#' in what may be misleading due to the inequivalence we expose),
-#' we propose a simple modification to recover the original formulation of
-#' weight decay regularization by decoupling the weight decay from the optimization
-#' steps taken w.r.t. the loss function
+#' From the abstract by the paper by Liu et al. (2019):
+#' The learning rate warmup heuristic achieves remarkable success
+#' in stabilizing training, accelerating convergence and improving
+#' generalization for adaptive stochastic optimization algorithms
+#' like RMSprop and Adam. Here, we study its mechanism in details.
+#' Pursuing the theory behind warmup, we identify a problem of the
+#' adaptive learning rate (i.e., it has problematically large variance
+#' in the early stage), suggest warmup works as a variance reduction
+#' technique, and provide both empirical and theoretical evidence to verify
+#' our hypothesis. We further propose RAdam, a new variant of Adam,
+#' by introducing a term to rectify the variance of the adaptive learning rate.
+#' Extensive experimental results on image classification, language modeling,
+#' and neural machine translation verify our intuition and demonstrate
+#' the effectiveness and robustness of our proposed method.
 #'
 #' @references
-#' Ilya Loshchilov, Frank Hutter,
-#' "Decoupled Weight Decay Regularization",
-#' International Conference on Learning Representations (ICLR) 2019.
-#' https://arxiv.org/abs/1711.05101
+#' Liyuan Liu, Haoming Jiang, Pengcheng He, Weizhu Chen,
+#' Xiaodong Liu, Jianfeng Gao, Jiawei Han,
+#' "On the Variance of the Adaptive Learning Rate and Beyond",
+#' International Conference on Learning Representations (ICLR) 2020.
+#' https://arxiv.org/abs/1908.03265
 #'
 #' @param params       List of parameters to optimize.
 #' @param lr           Learning rate (default: 1e-3)
@@ -36,19 +42,19 @@
 #'   and its square (default: (0.9, 0.999))
 #' @param eps          Term added to the denominator to improve numerical
 #'   stability (default: 1e-8)
-#' @param weight_decay Weight decay (L2 penalty) (default: 1e-6)
+#' @param weight_decay Weight decay (L2 penalty) (default: 0)
 #'
 #' @returns
 #' A torch optimizer object implementing the `step` method.
 #'
 #' @export
-optim_adamw <- torch::optimizer(
-    classname = "optim_adamw",
+optim_radam <- torch::optimizer(
+    classname = "optim_radam",
     initialize = function(params,
                           lr = 0.01,
                           betas = c(0.9, 0.999),
                           eps = 1e-8,
-                          weight_decay = 1e-6) {
+                          weight_decay = 0) {
         if (lr <= 0.0)
             stop("Learning rate must be positive.", call. = FALSE)
         if (eps < 0.0)
@@ -94,26 +100,38 @@ optim_adamw <- torch::optimizer(
 
             # take one step
             state(param)[["step"]] <- state(param)[["step"]] + 1
+            step <- state(param)[["step"]]
+
+            # bias correction
+            bias_correction1 <- 1 - beta1^state(param)[['step']]
+            bias_correction2 <- 1 - beta2^state(param)[['step']]
+
+            # L2 correction
+            if (weight_decay != 0)
+                grad$add_(param, alpha = weight_decay)
+
 
             # Decay the first moment
             exp_avg$mul_(beta1)$add_(grad, alpha = 1 - beta1)
             # Decay the second moment
             exp_avg_sq$mul_(beta2)$addcmul_(grad, grad, value = (1 - beta2))
 
-            # calculate denominator
-            denom = exp_avg_sq$sqrt()$add_(eps)
+            # correcting bias for the first moving moment
+            bias_corrected_exp_avg <-  exp_avg / bias_correction1
 
-            # bias correction
-            bias_correction1 <- 1 - beta1^state(param)[['step']]
-            bias_correction2 <- 1 - beta2^state(param)[['step']]
-            # calculate step size
-            step_size <- lr * sqrt(bias_correction2) / bias_correction1
-
-            # L2 correction (different from adam)
-            if (weight_decay != 0)
-                param$add_(-weight_decay * lr)
-            # go to next step
-            param$addcdiv_(exp_avg, denom, value = -step_size)
+            # maximum length of the approximated SMA
+            rho_inf <-  2 / (1 - beta2) - 1
+            # compute the length of the approximated SMA
+            rho_t <-  rho_inf - 2 * step * (beta2^step) / bias_correction2
+            # adjust learning rate
+            if (rho_t > 5.0) {
+                # Compute the variance rectification term and update parameters accordingly
+                rect <- sqrt((rho_t - 4) * (rho_t - 2) * rho_inf /
+                                 ((rho_inf - 4) * (rho_inf - 2) * rho_t))
+                adaptive_lr <- sqrt(bias_correction2) / exp_avg_sq$sqrt()$add_(eps)
+                param$add_(bias_corrected_exp_avg * lr * adaptive_lr * rect, alpha = -1.0)
+            } else
+                param$add_(bias_corrected_exp_avg * lr, alpha =- 1.0)
         }
         private$step_helper(closure, loop_fun)
     }

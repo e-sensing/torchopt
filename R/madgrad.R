@@ -35,36 +35,6 @@
 #'                      the root operation to improve numerical stability
 #'                      (default: 1e-6).
 #'
-#' @examples
-#' \dontrun{
-#' if (torch::torch_is_installed()) {
-#' library(torch)
-#' # define test function
-#' test_matyas <- function(x, y) { log(0.26 * (x^2 + y^2) - 0.48 * x * y)}
-#' # define starting point
-#' x0 <- -5
-#' y0 <- -5
-#' # create tensor
-#' x <- torch::torch_tensor(x0, requires_grad = TRUE)
-#' y <- torch::torch_tensor(y0, requires_grad = TRUE)
-#' # define optimizer
-#' optim <- optim_madgrad
-#' opt_hparams <- list(lr = 0.1)
-#' optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
-#' # run optimizer
-#' steps <- 200
-#' x_steps <- numeric(steps)
-#' y_steps <- numeric(steps)
-#' for (i in seq_len(steps)) {
-#'      x_steps[i] <- as.numeric(x)
-#'      y_steps[i] <- as.numeric(y)
-#'      optim$zero_grad()
-#'      z <- test_matyas(x, y)
-#'      z$backward()
-#'      optim$step()
-#' }
-#' }
-#' }
 #' @returns
 #' A torch optimizer object implementing the `step` method.
 #'
