@@ -263,8 +263,15 @@ test_optim <- function(optim, ...,
     x <- torch::torch_tensor(x0, requires_grad = TRUE)
     y <- torch::torch_tensor(y0, requires_grad = TRUE)
 
+    if ("hessian_power" %in% names(formals(optim)))
+        sec_deriv <- TRUE
+    else
+        sec_deriv <- FALSE
+
     # instantiate optimizer
     optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
+    # add callback for adahessian optimizer
+
 
     # run optimizer
     x_steps <- numeric(steps)
@@ -274,7 +281,7 @@ test_optim <- function(optim, ...,
         y_steps[i] <- as.numeric(y)
         optim$zero_grad()
         z <- test_fn(x, y)
-        z$backward()
+        z$backward(create_graph = sec_deriv)
         optim$step()
     }
 

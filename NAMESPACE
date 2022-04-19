@@ -2,6 +2,7 @@
 
 export(optim_adabelief)
 export(optim_adabound)
+export(optim_adahessian)
 export(optim_adamw)
 export(optim_madgrad)
 export(optim_nadam)
