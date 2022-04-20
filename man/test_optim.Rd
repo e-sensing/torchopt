@@ -2,23 +2,8 @@
 % Please edit documentation in R/utils-testopt.R
 \name{test_optim}
 \alias{test_optim}
-\alias{test_function}
-\alias{test_optim_valid}
 \title{Test optimization function}
 \usage{
-test_function(
-  test_fn,
-  ...,
-  bg_x_lim = c(-5, 5),
-  bg_y_lim = c(-5, 5),
-  bg_xy_breaks = 100,
-  bg_z_breaks = 32,
-  bg_palette = "viridis",
-  ct_levels = 10,
-  ct_labels = TRUE,
-  ct_color = "#FFFFFF7F"
-)
-
 test_optim(
   optim,
   ...,
@@ -37,22 +22,26 @@ test_optim(
   ct_color = "#FFFFFF7F",
   plot_each_step = FALSE
 )
-
-test_optim_valid(
-  optim,
-  opt_hparams = list(lr = 0.01),
-  test_fn = "beale",
-  steps = 100
-)
 }
 \arguments{
-\item{test_fn}{A test function (default \code{"beale"}).}
+\item{optim}{Torch optimizer function.}
 
 \item{...}{Additional parameters (passed to \code{image} function).}
 
-\item{bg_x_lim}{Background X limits (default \code{NULL})}
+\item{opt_hparams}{A list with optimizer initialize parameters
+(default \code{list(lr = 0.01)}).}
 
-\item{bg_y_lim}{Background Y limits (default \code{NULL})}
+\item{test_fn}{A test function (default \code{"beale"}).}
+
+\item{steps}{Number of steps to run (default \code{200}).}
+
+\item{pt_start_color}{Starting point color (default \code{"#5050FF7F"})}
+
+\item{pt_end_color}{Ending point color (default \code{"#FF5050FF"})}
+
+\item{ln_color}{Line path color (default \code{"#FF0000FF"})}
+
+\item{ln_weight}{Line path weight (default \code{2})}
 
 \item{bg_xy_breaks}{Background X and Y resolution (default \code{100})}
 
@@ -66,22 +55,10 @@ test_optim_valid(
 
 \item{ct_color}{Contour color (default \code{"#FFFFFF7F"})}
 
-\item{optim}{Torch optimizer function.}
-
-\item{opt_hparams}{A list with optimizer initialize parameters
-(default \code{list(lr = 0.01)}).}
-
-\item{steps}{Number of steps to run (default \code{100}).}
-
-\item{pt_start_color}{Starting point color (default \code{"#5050FF7F"})}
-
-\item{pt_end_color}{Ending point color (default \code{"#FF5050FF"})}
-
-\item{ln_color}{Line path color (default \code{"#FF0000FF"})}
-
-\item{ln_weight}{Line path weight (default \code{2})}
-
 \item{plot_each_step}{Should output each step? (default \code{FALSE})}
+}
+\value{
+No return value, called for producing animated gifs
 }
 \description{
 \code{test_optim()} function is useful to visualize how optimizers solve the

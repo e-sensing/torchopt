@@ -134,13 +134,11 @@ domain_sphere <- function(){
 #' @param opt_hparams    A list with optimizer initialize parameters
 #'   (default `list(lr = 0.01)`).
 #' @param test_fn        A test function (default `"beale"`).
-#' @param steps          Number of steps to run (default `100`).
+#' @param steps          Number of steps to run (default `200`).
 #' @param pt_start_color Starting point color (default `"#5050FF7F"`)
 #' @param pt_end_color   Ending point color (default `"#FF5050FF"`)
 #' @param ln_color       Line path color (default `"#FF0000FF"`)
 #' @param ln_weight      Line path weight (default `2`)
-#' @param bg_x_lim       Background X limits (default `NULL`)
-#' @param bg_y_lim       Background Y limits (default `NULL`)
 #' @param bg_xy_breaks   Background X and Y resolution (default `100`)
 #' @param bg_z_breaks    Background Z resolution (default `32`)
 #' @param bg_palette     Background palette (default `"viridis"`)
@@ -149,70 +147,8 @@ domain_sphere <- function(){
 #' @param ct_color       Contour color (default `"#FFFFFF7F"`)
 #' @param plot_each_step Should output each step? (default `FALSE`)
 #'
+#' @return No return value, called for producing animated gifs
 #'
-NULL
-
-#' @rdname test_optim
-#' @export
-test_function <- function(test_fn, ...,
-                          bg_x_lim = c(-5, 5),
-                          bg_y_lim = c(-5, 5),
-                          bg_xy_breaks = 100,
-                          bg_z_breaks = 32,
-                          bg_palette = "viridis",
-                          ct_levels = 10,
-                          ct_labels = TRUE,
-                          ct_color = "#FFFFFF7F") {
-
-    # pre-conditions
-    if (is.character(test_fn)) {
-        if (!exists(test_fn,
-                    envir = asNamespace("torchopt"),
-                    inherits = FALSE)) {
-            stop("invalid 'test_fn' param.", call. = FALSE)
-        }
-        # get gradient function
-        test_fn <- get(test_fn,
-                       envir = asNamespace("torchopt"),
-                       inherits = FALSE)
-    }
-    if (!is.function(test_fn)) {
-        stop("invalid 'test_fn' param.", call. = FALSE)
-    }
-
-    # prepare data for gradient plot
-    x <- seq(bg_x_lim[[1]], bg_x_lim[[2]], length.out = bg_xy_breaks)
-    y <- seq(bg_y_lim[[1]], bg_y_lim[[2]], length.out = bg_xy_breaks)
-    z <- outer(X = x, Y = y, FUN = test_fn)
-
-    # plot background
-    image(
-        x = x,
-        y = y,
-        z = z,
-        col = hcl.colors(
-            n = bg_z_breaks,
-            palette = bg_palette
-        ),
-        ...
-    )
-
-    # plot contour
-    if (ct_levels > 0) {
-        contour(
-            x = x,
-            y = y,
-            z = z,
-            nlevels = ct_levels,
-            drawlabels = ct_labels,
-            col = ct_color,
-            add = TRUE
-        )
-    }
-
-}
-
-#' @rdname test_optim
 #' @export
 test_optim <- function(optim, ...,
                        opt_hparams = list(lr = 0.01),
@@ -263,15 +199,8 @@ test_optim <- function(optim, ...,
     x <- torch::torch_tensor(x0, requires_grad = TRUE)
     y <- torch::torch_tensor(y0, requires_grad = TRUE)
 
-    if ("hessian_power" %in% names(formals(optim)))
-        sec_deriv <- TRUE
-    else
-        sec_deriv <- FALSE
-
     # instantiate optimizer
     optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
-    # add callback for adahessian optimizer
-
 
     # run optimizer
     x_steps <- numeric(steps)
@@ -281,7 +210,7 @@ test_optim <- function(optim, ...,
         y_steps[i] <- as.numeric(y)
         optim$zero_grad()
         z <- test_fn(x, y)
-        z$backward(create_graph = sec_deriv)
+        z$backward()
         optim$step()
     }
 
@@ -355,46 +284,5 @@ test_optim <- function(optim, ...,
         )
     }
 }
-#' @rdname test_optim
-#' @export
-test_optim_valid <- function(optim,
-                             opt_hparams = list(lr = 0.01),
-                             test_fn = "beale",
-                             steps = 100) {
 
-    # get starting points
-    domain_fn <- get(paste0("domain_",test_fn),
-                     envir = asNamespace("torchopt"),
-                     inherits = FALSE)
-    # get gradient function
-    test_fn <- get(test_fn,
-                   envir = asNamespace("torchopt"),
-                   inherits = FALSE)
-
-    # starting point
-    dom <- domain_fn()
-    x0 <- dom[["x0"]]
-    y0 <- dom[["y0"]]
-
-    # create tensor
-    x <- torch::torch_tensor(x0, requires_grad = TRUE)
-    y <- torch::torch_tensor(y0, requires_grad = TRUE)
-
-    # instantiate optimizer
-    optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
-
-    # run optimizer
-    x_steps <- numeric(steps)
-    y_steps <- numeric(steps)
-    for (i in seq_len(steps)) {
-        x_steps[i] <- as.numeric(x)
-        y_steps[i] <- as.numeric(y)
-        optim$zero_grad()
-        z <- test_fn(x, y)
-        z$backward()
-        optim$step()
-    }
-    return(list(x_steps = x_steps,
-                y_steps = y_steps))
-}
 

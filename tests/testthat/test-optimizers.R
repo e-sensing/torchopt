@@ -2,10 +2,50 @@ library(torchopt)
 beale <- function(x, y) {
     log((1.5 - x + x * y)^2 + (2.25 - x - x * y^2)^2 + (2.625 - x + x * y^3)^2)
 }
+test_optim_valid <- function(optim,
+                             opt_hparams = list(lr = 0.01),
+                             test_fn = "beale",
+                             steps = 100) {
+
+    # get starting points
+    domain_fn <- get(paste0("domain_",test_fn),
+                     envir = asNamespace("torchopt"),
+                     inherits = FALSE)
+    # get gradient function
+    test_fn <- get(test_fn,
+                   envir = asNamespace("torchopt"),
+                   inherits = FALSE)
+
+    # starting point
+    dom <- domain_fn()
+    x0 <- dom[["x0"]]
+    y0 <- dom[["y0"]]
+
+    # create tensor
+    x <- torch::torch_tensor(x0, requires_grad = TRUE)
+    y <- torch::torch_tensor(y0, requires_grad = TRUE)
+
+    # instantiate optimizer
+    optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
+
+    # run optimizer
+    x_steps <- numeric(steps)
+    y_steps <- numeric(steps)
+    for (i in seq_len(steps)) {
+        x_steps[i] <- as.numeric(x)
+        y_steps[i] <- as.numeric(y)
+        optim$zero_grad()
+        z <- test_fn(x, y)
+        z$backward()
+        optim$step()
+    }
+    return(list(x_steps = x_steps,
+                y_steps = y_steps))
+}
 test_that("adamw optimizer", {
     testthat::skip_on_cran()
     set.seed(12345)
-    xy <- torchopt::test_optim_valid(
+    xy <- test_optim_valid(
         optim = torchopt::optim_adamw,
         opt_hparams = list(lr = 0.05),
         steps = 400,

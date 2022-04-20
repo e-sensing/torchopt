@@ -40,9 +40,8 @@ On sparse problems both weight_decay and momentum should be set to 0.
 \references{
 Aaron Defazio, Samy Jelassi,
 "Adaptivity without Compromise: A Momentumized, Adaptive, Dual
-Averaged Gradient Method for Stochastic Optimization",
-arXiv preprint arXiv:2101.11075, 2021.
-https://doi.org/10.48550/arXiv.2101.11075
+Averaged Gradient Method for Stochastic Optimization".
+https://arxiv.org/abs/2101.11075
 }
 \author{
 Daniel Falbel, \email{dfalbel@gmail.com}
