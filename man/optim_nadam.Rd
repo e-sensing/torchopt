@@ -35,7 +35,7 @@ A torch optimizer object implementing the \code{step} method.
 R implementation of the Nadam optimizer proposed
 by Dazat (2016).
 
-From the abstract by the paper by Dazat (2019):
+From the abstract by the paper by Dozat (2016):
 This work aims to improve upon the recently proposed and
 rapidly popularized optimization algorithm Adam (Kingma & Ba, 2014).
 Adam has two main components—a momentum component and an adaptive
@@ -43,10 +43,45 @@ learning rate component. However, regular momentum can be shown conceptually
 and empirically to be inferior to a similar algorithm known as
 Nesterov’s accelerated gradient (NAG).
 }
+\examples{
+if (torch::torch_is_installed()) {
+# function to demonstrate optimization
+beale <- function(x, y) {
+    log((1.5 - x + x * y)^2 + (2.25 - x - x * y^2)^2 + (2.625 - x + x * y^3)^2)
+ }
+# define optimizer
+optim <- torchopt::optim_nadam
+# define hyperparams
+opt_hparams <- list(lr = 0.01)
+
+# starting point
+x0 <- 3
+y0 <- 3
+# create tensor
+x <- torch::torch_tensor(x0, requires_grad = TRUE)
+y <- torch::torch_tensor(y0, requires_grad = TRUE)
+# instantiate optimizer
+optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
+# run optimizer
+steps <- 400
+x_steps <- numeric(steps)
+y_steps <- numeric(steps)
+for (i in seq_len(steps)) {
+    x_steps[i] <- as.numeric(x)
+    y_steps[i] <- as.numeric(y)
+    optim$zero_grad()
+    z <- beale(x, y)
+    z$backward()
+    optim$step()
+}
+print(paste0("starting value = ", beale(x0, y0)))
+print(paste0("final value = ", beale(x_steps[steps], y_steps[steps])))
+}
+}
 \references{
 Timothy Dozat,
 "Incorporating Nesterov Momentum into Adam",
-International Conference on Learning Representations (ICLR) 2019.
+International Conference on Learning Representations (ICLR) 2016.
 https://openreview.net/pdf/OM0jvwB8jIp57ZJjtNEZ.pdf
 }
 \author{

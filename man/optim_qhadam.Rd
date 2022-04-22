@@ -53,6 +53,42 @@ QHAdam decouples the momentum term from the current gradient when
 updating the weights, and decouples the mean squared gradients
 term from the current squared gradient when updating the weights.
 }
+\examples{
+if (torch::torch_is_installed()) {
+# function to demonstrate optimization
+beale <- function(x, y) {
+    log((1.5 - x + x * y)^2 + (2.25 - x - x * y^2)^2 + (2.625 - x + x * y^3)^2)
+ }
+# define optimizer
+optim <- torchopt::optim_qhadam
+# define hyperparams
+opt_hparams <- list(lr = 0.01)
+
+# starting point
+x0 <- 3
+y0 <- 3
+# create tensor
+x <- torch::torch_tensor(x0, requires_grad = TRUE)
+y <- torch::torch_tensor(y0, requires_grad = TRUE)
+# instantiate optimizer
+optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
+# run optimizer
+steps <- 400
+x_steps <- numeric(steps)
+y_steps <- numeric(steps)
+for (i in seq_len(steps)) {
+    x_steps[i] <- as.numeric(x)
+    y_steps[i] <- as.numeric(y)
+    optim$zero_grad()
+    z <- beale(x, y)
+    z$backward()
+    optim$step()
+}
+print(paste0("starting value = ", beale(x0, y0)))
+print(paste0("final value = ", beale(x_steps[steps], y_steps[steps])))
+}
+
+}
 \references{
 Jerry Ma, Denis Yarats,
 "Quasi-hyperbolic momentum and Adam for deep learning".
