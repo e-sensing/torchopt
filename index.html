@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">torchopt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -87,8 +87,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To install the development version of <code>torchopt</code> do as :</p>
+<p>Installing the CRAN (stable) version of <code>torchopt</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torchopt"</span><span class="op">)</span></code></pre></div>
+<p>Installing the development version of <code>torchopt</code> do as :</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu">install_github</span><span class="op">(</span><span class="st">"e-sensing/torchopt"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -100,7 +103,7 @@
 <li><p><code><a href="reference/optim_adamw.html">optim_adamw()</a></code>: AdamW optimizer proposed by Loshchilov &amp; Hutter (2019). Converted from the <code>pytorch</code> code developed by Collin Donahue-Oponski available at <a href="https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3" class="external-link uri">https://gist.github.com/colllin/0b146b154c4351f9a40f741a28bff1e3</a></p></li>
 <li><p><code><a href="reference/optim_adabelief.html">optim_adabelief()</a></code>: Adabelief optimizer proposed by Zhuang et al (2020). Converted from the authors’ PyTorch code: <a href="https://github.com/juntang-zhuang/Adabelief-Optimizer" class="external-link uri">https://github.com/juntang-zhuang/Adabelief-Optimizer</a>.</p></li>
 <li><p><code><a href="reference/optim_adabound.html">optim_adabound()</a></code>: Adabound optimizer proposed by Luo et al.(2019). Converted from the authors’ PyTorch code: <a href="https://github.com/Luolc/AdaBound" class="external-link uri">https://github.com/Luolc/AdaBound</a>.</p></li>
-<li><p><code><a href="reference/optim_adahessian.html">optim_adahessian()</a></code>: Adahessian optimizer proposed by Luo et al.(2019). Converted from the authors’ PyTorch code: <a href="https://github.com/Luolc/AdaBound" class="external-link uri">https://github.com/Luolc/AdaBound</a>.</p></li>
+<li><p><code><a href="reference/optim_adahessian.html">optim_adahessian()</a></code>: Adahessian optimizer proposed by Yao et al.(2021). Converted from the authors’ PyTorch code: <a href="https://github.com/amirgholami" class="external-link uri">https://github.com/amirgholami</a>.</p></li>
 <li><p><code><a href="reference/optim_madgrad.html">optim_madgrad()</a></code>: Momentumized, Adaptive, Dual Averaged Gradient Method for Stochastic Optimization (MADGRAD) optimizer proposed by Defazio &amp; Jelassi (2021). The function is imported from <a href="https://CRAN.R-project.org/package=madgrad" class="external-link">madgrad</a> package and the source code is available at <a href="https://github.com/mlverse/madgrad" class="external-link uri">https://github.com/mlverse/madgrad</a></p></li>
 <li><p><code><a href="reference/optim_nadam.html">optim_nadam()</a></code>: Incorporation of Nesterov Momentum into Adam proposed by Dozat (2016). Converted from the PyTorch site <a href="https://github.com/pytorch/pytorch" class="external-link uri">https://github.com/pytorch/pytorch</a>.</p></li>
 <li><p><code><a href="reference/optim_qhadam.html">optim_qhadam()</a></code>: Quasi-hyperbolic version of Adam proposed by Ma and Yarats(2019). Converted from the code developed by Meta AI: <a href="https://github.com/facebookresearch/qhoptim" class="external-link uri">https://github.com/facebookresearch/qhoptim</a>.</p></li>
@@ -118,7 +121,7 @@
 <h3 id="optim_adamw">
 <code>optim_adamw()</code>:<a class="anchor" aria-label="anchor" href="#optim_adamw"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># test optim adamw</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span>
 <span class="fu">torchopt</span><span class="fu">::</span><span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
@@ -134,7 +137,7 @@
 <h3 id="optim_adabelief">
 <code>optim_adabelief()</code>:<a class="anchor" aria-label="anchor" href="#optim_adabelief"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
     optim <span class="op">=</span> <span class="va">optim_adabelief</span>,
@@ -149,7 +152,7 @@
 <h3 id="optim_adabound">
 <code>optim_adabound()</code>:<a class="anchor" aria-label="anchor" href="#optim_adabound"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># set manual seed</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">22</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
@@ -165,7 +168,7 @@
 <h3 id="optim_adahessian">
 <code>optim_adahessian()</code>:<a class="anchor" aria-label="anchor" href="#optim_adahessian"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># set manual seed</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">290356</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
@@ -181,7 +184,7 @@
 <h3 id="optim_madgrad">
 <code>optim_madgrad()</code>:<a class="anchor" aria-label="anchor" href="#optim_madgrad"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">256</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
     optim <span class="op">=</span> <span class="va">optim_madgrad</span>,
@@ -196,7 +199,7 @@
 <h3 id="optim_nadam">
 <code>optim_nadam()</code>:<a class="anchor" aria-label="anchor" href="#optim_nadam"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2903</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
     optim <span class="op">=</span> <span class="va">optim_nadam</span>,
@@ -211,7 +214,7 @@
 <h3 id="optim_qhadam">
 <code>optim_qhadam()</code>:<a class="anchor" aria-label="anchor" href="#optim_qhadam"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1024</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
     optim <span class="op">=</span> <span class="va">optim_qhadam</span>,
@@ -226,7 +229,7 @@
 <h3 id="optim_radam">
 <code>optim_radam()</code>:<a class="anchor" aria-label="anchor" href="#optim_radam"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1024</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
     optim <span class="op">=</span> <span class="va">optim_radam</span>,
@@ -241,7 +244,7 @@
 <h3 id="optim_swats">
 <code>optim_swats()</code>:<a class="anchor" aria-label="anchor" href="#optim_swats"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
     optim <span class="op">=</span> <span class="va">optim_swats</span>,
@@ -256,7 +259,7 @@
 <h3 id="optim_yogi">
 <code>optim_yogi()</code>:<a class="anchor" aria-label="anchor" href="#optim_yogi"></a>
 </h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># set manual seed</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">66</span><span class="op">)</span>
 <span class="fu"><a href="reference/test_optim.html">test_optim</a></span><span class="op">(</span>
