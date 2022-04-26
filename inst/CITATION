@@ -1,7 +1,7 @@
 To cite package ‘torchopt’ in publications use:
 
   Gilberto Camara, Rolf Simoes, Daniel Falbel, Felipe Souza and Alber Sanchez (NA).
-  torchopt: Advanced Optimizers for Torch. R package version 0.1.1.
+  torchopt: Advanced Optimizers for Torch. R package version 0.1.2.
   https://github.com/e-sensing/torchopt/
 
 A BibTeX entry for LaTeX users is
@@ -9,6 +9,6 @@ A BibTeX entry for LaTeX users is
   @Manual{,
     title = {torchopt: Advanced Optimizers for Torch},
     author = {Gilberto Camara and Rolf Simoes and Daniel Falbel and Felipe Souza and Alber Sanchez},
-    note = {R package version 0.1.1},
+    note = {R package version 0.1.2},
     url = {https://github.com/e-sensing/torchopt/},
   }
