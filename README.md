@@ -21,7 +21,13 @@ of the torch package in R.
 
 ## Installation
 
-To install the development version of `torchopt` do as :
+Installing the CRAN (stable) version of `torchopt`:
+
+``` r
+install.packages("torchopt")
+```
+
+Installing the development version of `torchopt` do as :
 
 ``` r
 library(devtools)
@@ -46,9 +52,9 @@ optimizers:
     Converted from the authors’ PyTorch code:
     <https://github.com/Luolc/AdaBound>.
 
--   `optim_adahessian()`: Adahessian optimizer proposed by Luo et
-    al.(2019). Converted from the authors’ PyTorch code:
-    <https://github.com/Luolc/AdaBound>.
+-   `optim_adahessian()`: Adahessian optimizer proposed by Yao et
+    al.(2021). Converted from the authors’ PyTorch code:
+    <https://github.com/amirgholami>.
 
 -   `optim_madgrad()`: Momentumized, Adaptive, Dual Averaged Gradient
     Method for Stochastic Optimization (MADGRAD) optimizer proposed by
