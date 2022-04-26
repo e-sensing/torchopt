@@ -6,9 +6,9 @@
 \usage{
 optim_adahessian(
   params,
-  lr = 0.001,
+  lr = 0.15,
   betas = c(0.9, 0.999),
-  eps = 1e-08,
+  eps = 1e-04,
   weight_decay = 0,
   hessian_power = 0.5
 )
@@ -35,9 +35,11 @@ An optimizer object implementing the \code{step} and \code{zero_grad} methods.
 \description{
 R implementation of the Adahessian optimizer proposed
 by Yao et al.(2020). The original implementation is available at
-https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/adahessian.py
+https://github.com/amirgholami/adahessian.
 }
 \examples{
+\dontrun{
+
 if (torch::torch_is_installed()) {
 # function to demonstrate optimization
 beale <- function(x, y) {
@@ -72,10 +74,13 @@ print(paste0("starting value = ", beale(x0, y0)))
 print(paste0("final value = ", beale(x_steps[steps], y_steps[steps])))
 }
 }
+}
 \references{
-Yao, Z., Gholami, A., Shen, S., Mustafa, M., Keutzer, K., & Mahoney, M. (2021).
+Yao, Z., Gholami, A., Shen, S., Mustafa, M., Keutzer, K.,
+& Mahoney, M. (2021).
 ADAHESSIAN: An Adaptive Second Order Optimizer for Machine Learning.
-Proceedings of the AAAI Conference on Artificial Intelligence, 35(12), 10665-10673.
+Proceedings of the AAAI Conference on Artificial Intelligence, 35(12),
+10665-10673.
 https://arxiv.org/abs/2006.00719
 }
 \author{

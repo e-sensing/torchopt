@@ -33,6 +33,8 @@
 #' @returns
 #' An optimizer object implementing the `step` and `zero_grad` methods.
 #' @examples
+#' \dontrun{
+#'
 #' if (torch::torch_is_installed()) {
 
 #' # function to demonstrate optimization
@@ -66,6 +68,7 @@
 #' }
 #' print(paste0("starting value = ", beale(x0, y0)))
 #' print(paste0("final value = ", beale(x_steps[steps], y_steps[steps])))
+#' }
 #' }
 #' @export
 optim_adahessian <- torch::optimizer(
