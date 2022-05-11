@@ -167,8 +167,8 @@ test_optim <- function(optim, ...,
                        plot_each_step = FALSE) {
 
     # pre-conditions
-    if (!inherits(optim, "function")) {
-        stop("invalid 'opt' param.", call. = FALSE)
+    if (!inherits(optim, "torch_optimizer_generator")) {
+        stop("invalid 'optim' param.", call. = FALSE)
     }
     if (is.character(test_fn)) {
         if (!exists(test_fn,
@@ -202,7 +202,7 @@ test_optim <- function(optim, ...,
     # instantiate optimizer
     optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
     grad_keep <-  FALSE
-    if (optim$classname == c("optim_adahessian")) {
+    if (!is.null(optim$classname) && optim$classname == c("optim_adahessian")) {
         grad_keep <- TRUE
     }
     # run optimizer
