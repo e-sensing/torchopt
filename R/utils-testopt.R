@@ -167,7 +167,9 @@ test_optim <- function(optim, ...,
                        plot_each_step = FALSE) {
 
     # pre-conditions
-    if (!inherits(optim, "torch_optimizer_generator")) {
+    inherits_from <- if (packageVersion("torch") > '0.7.2') "torch_optimizer_generator" else "function"
+    if (!inherits(optim, inherits_from)) {
+
         stop("invalid 'optim' param.", call. = FALSE)
     }
     if (is.character(test_fn)) {
