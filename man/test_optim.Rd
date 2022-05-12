@@ -31,7 +31,11 @@ test_optim(
 \item{opt_hparams}{A list with optimizer initialize parameters
 (default \code{list(lr = 0.01)}).}
 
-\item{test_fn}{A test function (default \code{"beale"}).}
+\item{test_fn}{A test function (default \code{"beale"}). You can also pass
+a list with 2 elements. The first should be a function that will be optimized
+and the second is a function that returns a named vector with \code{x0}, \code{y0}
+(the starting points) and \code{xmax}, \code{xmin}, \code{ymax} and \code{ymin} (the domain).
+An example: \code{c(x0 = x0, y0 = y0, xmax = 5, xmin = -5, ymax = 5, ymin = -5)}}
 
 \item{steps}{Number of steps to run (default \code{200}).}
 

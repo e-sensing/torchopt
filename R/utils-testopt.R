@@ -133,7 +133,11 @@ domain_sphere <- function(){
 #' @param ...            Additional parameters (passed to `image` function).
 #' @param opt_hparams    A list with optimizer initialize parameters
 #'   (default `list(lr = 0.01)`).
-#' @param test_fn        A test function (default `"beale"`).
+#' @param test_fn        A test function (default `"beale"`). You can also pass
+#'   a list with 2 elements. The first should be a function that will be optimized
+#'   and the second is a function that returns a named vector with `x0`, `y0`
+#'   (the starting points) and `xmax`, `xmin`, `ymax` and `ymin` (the domain).
+#'   An example: `c(x0 = x0, y0 = y0, xmax = 5, xmin = -5, ymax = 5, ymin = -5)`
 #' @param steps          Number of steps to run (default `200`).
 #' @param pt_start_color Starting point color (default `"#5050FF7F"`)
 #' @param pt_end_color   Ending point color (default `"#FF5050FF"`)
@@ -184,7 +188,11 @@ test_optim <- function(optim, ...,
         test_fn <- get(test_fn,
                        envir = asNamespace("torchopt"),
                        inherits = FALSE)
+    } else if (is.list(test_fn)) {
+        domain_fn <- test_fn[[2]]
+        test_fn <- test_fn[[1]]
     }
+
     if (!is.function(test_fn)) {
         stop("invalid 'test_fn' param.", call. = FALSE)
     }
@@ -225,7 +233,7 @@ test_optim <- function(optim, ...,
     # prepare data for gradient plot
     x <- seq(xmin, xmax, length.out = bg_xy_breaks)
     y <- seq(xmin, xmax, length.out = bg_xy_breaks)
-    z <- outer(X = x, Y = y, FUN = test_fn)
+    z <- outer(X = x, Y = y, FUN = function(x, y) as.numeric(test_fn(x, y)))
 
     plot_from_step <- steps
     if (plot_each_step) {
