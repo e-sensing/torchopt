@@ -30,8 +30,8 @@ bukin_n6 <- function(x, y) {
 }
 domain_bukin_n6 <- function(){
     x0 <- runif(1,-15, -5)
-    y0 <- runif(1,-4, 6)
-    return(c(x0 = x0, y0 = y0, xmax = -5, xmin = -15, ymax = -4, ymin = 6))
+    y0 <- runif(1,-3, 3)
+    return(c(x0 = x0, y0 = y0, xmax = -5, xmin = -15, ymax = -3, ymin = 3))
 }
 
 easom <- function(x, y) {
@@ -81,7 +81,7 @@ domain_matyas <- function(){
 rastrigin <- function(x, y) {
     20 + (x^2 - 10 * cos(2 * pi * x)) + (y^2 - 10 * cos(2 * pi * y))
 }
-domain_rastigirin <- function(){
+domain_rastrigin <- function(){
     x0 <- runif(1,-5.12, 5.12)
     y0 <- runif(1,-5.12, 5.12)
     return(c(x0 = x0, y0 = y0, xmax = 5.12, xmin = -5.12, ymax = 5.12, ymin = -5.12))
@@ -90,8 +90,8 @@ rosenbrock <- function(x, y) {
     log(100 * (y - x^2)^2 + (1 - x)^2)
 }
 domain_rosenbrock <- function(){
-    x0 <- runif(1,-2, 2)
-    y0 <- runif(1,-1, 3)
+    x0 <- -2
+    y0 <- 2
     return(c(x0 = x0, y0 = y0, xmax = 2, xmin = -2, ymax = 3, ymin = -1))
 }
 sphere <- function(x, y) {
@@ -171,8 +171,10 @@ test_optim <- function(optim, ...,
                        plot_each_step = FALSE) {
 
     # pre-conditions
-    if (!inherits(optim, "function")) {
-        stop("invalid 'opt' param.", call. = FALSE)
+    inherits_from <- if (packageVersion("torch") > '0.7.2') "torch_optimizer_generator" else "function"
+    if (!inherits(optim, inherits_from)) {
+
+        stop("invalid 'optim' param.", call. = FALSE)
     }
     if (is.character(test_fn)) {
         if (!exists(test_fn,
@@ -209,7 +211,10 @@ test_optim <- function(optim, ...,
 
     # instantiate optimizer
     optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
-
+    grad_keep <-  FALSE
+    if (!is.null(optim$classname) && optim$classname == c("optim_adahessian")) {
+        grad_keep <- TRUE
+    }
     # run optimizer
     x_steps <- numeric(steps)
     y_steps <- numeric(steps)
@@ -218,7 +223,7 @@ test_optim <- function(optim, ...,
         y_steps[i] <- as.numeric(y)
         optim$zero_grad()
         z <- test_fn(x, y)
-        z$backward()
+        z$backward(create_graph = grad_keep, retain_graph = grad_keep)
         optim$step()
     }
 
