@@ -111,7 +111,11 @@ algorithms can face.</p>
 <dd><p>A list with optimizer initialize parameters
 (default <code>list(lr = 0.01)</code>).</p></dd>
 <dt>test_fn</dt>
-<dd><p>A test function (default <code>"beale"</code>).</p></dd>
+<dd><p>A test function (default <code>"beale"</code>). You can also pass
+a list with 2 elements. The first should be a function that will be optimized
+and the second is a function that returns a named vector with <code>x0</code>, <code>y0</code>
+(the starting points) and <code>xmax</code>, <code>xmin</code>, <code>ymax</code> and <code>ymin</code> (the domain).
+An example: <code>c(x0 = x0, y0 = y0, xmax = 5, xmin = -5, ymax = 5, ymin = -5)</code></p></dd>
 <dt>steps</dt>
 <dd><p>Number of steps to run (default <code>200</code>).</p></dd>
 <dt>pt_start_color</dt>
