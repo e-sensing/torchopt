@@ -214,6 +214,7 @@ test_optim <- function(optim, ...,
     grad_keep <-  FALSE
     if (!is.null(optim$classname) && optim$classname == c("optim_adahessian")) {
         grad_keep <- TRUE
+        # retain_graph is not exposed before torch 0.7.2
         if (!utils::packageVersion("torch") > '0.7.2') {
             stop("adahessian needs torch version > 0.7.2, got ",
                  utils::packageVersion("torch"))
@@ -227,6 +228,7 @@ test_optim <- function(optim, ...,
         y_steps[i] <- as.numeric(y)
         optim$zero_grad()
         z <- test_fn(x, y)
+        # retain_graph is not exposed before torch 0.7.2
         if (utils::packageVersion("torch") > '0.7.2') {
             z$backward(create_graph = grad_keep, retain_graph = grad_keep)
         } else {
