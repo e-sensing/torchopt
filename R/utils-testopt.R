@@ -133,7 +133,11 @@ domain_sphere <- function(){
 #' @param ...            Additional parameters (passed to `image` function).
 #' @param opt_hparams    A list with optimizer initialize parameters
 #'   (default `list(lr = 0.01)`).
-#' @param test_fn        A test function (default `"beale"`).
+#' @param test_fn        A test function (default `"beale"`). You can also pass
+#'   a list with 2 elements. The first should be a function that will be optimized
+#'   and the second is a function that returns a named vector with `x0`, `y0`
+#'   (the starting points) and `xmax`, `xmin`, `ymax` and `ymin` (the domain).
+#'   An example: `c(x0 = x0, y0 = y0, xmax = 5, xmin = -5, ymax = 5, ymin = -5)`
 #' @param steps          Number of steps to run (default `200`).
 #' @param pt_start_color Starting point color (default `"#5050FF7F"`)
 #' @param pt_end_color   Ending point color (default `"#FF5050FF"`)
@@ -167,7 +171,7 @@ test_optim <- function(optim, ...,
                        plot_each_step = FALSE) {
 
     # pre-conditions
-    inherits_from <- if (packageVersion("torch") > '0.7.2') "torch_optimizer_generator" else "function"
+    inherits_from <- if (utils::packageVersion("torch") > '0.7.2') "torch_optimizer_generator" else "function"
     if (!inherits(optim, inherits_from)) {
 
         stop("invalid 'optim' param.", call. = FALSE)
@@ -186,7 +190,11 @@ test_optim <- function(optim, ...,
         test_fn <- get(test_fn,
                        envir = asNamespace("torchopt"),
                        inherits = FALSE)
+    } else if (is.list(test_fn)) {
+        domain_fn <- test_fn[[2]]
+        test_fn <- test_fn[[1]]
     }
+
     if (!is.function(test_fn)) {
         stop("invalid 'test_fn' param.", call. = FALSE)
     }
@@ -206,6 +214,11 @@ test_optim <- function(optim, ...,
     grad_keep <-  FALSE
     if (!is.null(optim$classname) && optim$classname == c("optim_adahessian")) {
         grad_keep <- TRUE
+        # retain_graph is not exposed before torch 0.7.2
+        if (!utils::packageVersion("torch") > '0.7.2') {
+            stop("adahessian needs torch version > 0.7.2, got ",
+                 utils::packageVersion("torch"))
+        }
     }
     # run optimizer
     x_steps <- numeric(steps)
@@ -215,7 +228,12 @@ test_optim <- function(optim, ...,
         y_steps[i] <- as.numeric(y)
         optim$zero_grad()
         z <- test_fn(x, y)
-        z$backward(create_graph = grad_keep, retain_graph = grad_keep)
+        # retain_graph is not exposed before torch 0.7.2
+        if (utils::packageVersion("torch") > '0.7.2') {
+            z$backward(create_graph = grad_keep, retain_graph = grad_keep)
+        } else {
+            z$backward(create_graph = grad_keep)
+        }
         optim$step()
     }
 
@@ -230,7 +248,7 @@ test_optim <- function(optim, ...,
     # prepare data for gradient plot
     x <- seq(xmin, xmax, length.out = bg_xy_breaks)
     y <- seq(xmin, xmax, length.out = bg_xy_breaks)
-    z <- outer(X = x, Y = y, FUN = test_fn)
+    z <- outer(X = x, Y = y, FUN = function(x, y) as.numeric(test_fn(x, y)))
 
     plot_from_step <- steps
     if (plot_each_step) {
