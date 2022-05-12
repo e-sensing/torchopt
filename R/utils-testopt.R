@@ -171,7 +171,7 @@ test_optim <- function(optim, ...,
                        plot_each_step = FALSE) {
 
     # pre-conditions
-    inherits_from <- if (packageVersion("torch") > '0.7.2') "torch_optimizer_generator" else "function"
+    inherits_from <- if (utils::packageVersion("torch") > '0.7.2') "torch_optimizer_generator" else "function"
     if (!inherits(optim, inherits_from)) {
 
         stop("invalid 'optim' param.", call. = FALSE)
@@ -214,6 +214,10 @@ test_optim <- function(optim, ...,
     grad_keep <-  FALSE
     if (!is.null(optim$classname) && optim$classname == c("optim_adahessian")) {
         grad_keep <- TRUE
+        if (!utils::packageVersion("torch") > '0.7.2') {
+            stop("adahessian needs torch version > 0.7.2, got ",
+                 utils::packageVersion("torch"))
+        }
     }
     # run optimizer
     x_steps <- numeric(steps)
@@ -223,7 +227,11 @@ test_optim <- function(optim, ...,
         y_steps[i] <- as.numeric(y)
         optim$zero_grad()
         z <- test_fn(x, y)
-        z$backward(create_graph = grad_keep, retain_graph = grad_keep)
+        if (utils::packageVersion("torch") > '0.7.2') {
+            z$backward(create_graph = grad_keep, retain_graph = grad_keep)
+        } else {
+            z$backward(create_graph = grad_keep)
+        }
         optim$step()
     }
 
