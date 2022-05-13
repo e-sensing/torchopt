@@ -210,7 +210,7 @@ test_optim <- function(optim, ...,
     y <- torch::torch_tensor(y0, requires_grad = TRUE)
 
     # instantiate optimizer
-    if(!missing(opt_hparams))
+    if(!is.null(opt_hparams))
         optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
     else
         optim <- do.call(optim, c(list(params = list(x, y))))
