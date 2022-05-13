@@ -133,7 +133,7 @@ optim_qhadam <- torch::optimizer(
                 if (decouple_weight_decay)
                     param$mul_(1 - lr * weight_decay)
                 else
-                    d_p$add_(weight_decay, p.data)
+                    d_p$add_(weight_decay, param)
             }
 
             d_p_sq = d_p$mul(d_p)
