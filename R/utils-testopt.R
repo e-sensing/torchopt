@@ -155,7 +155,7 @@ domain_sphere <- function(){
 #'
 #' @export
 test_optim <- function(optim, ...,
-                       opt_hparams = NULL,
+                       opt_hparams = list(),
                        test_fn = "beale",
                        steps = 200,
                        pt_start_color = "#5050FF7F",
