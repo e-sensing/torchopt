@@ -7,7 +7,7 @@
 test_optim(
   optim,
   ...,
-  opt_hparams = NULL,
+  opt_hparams = list(),
   test_fn = "beale",
   steps = 200,
   pt_start_color = "#5050FF7F",
@@ -28,7 +28,7 @@ test_optim(
 
 \item{...}{Additional parameters (passed to \code{image} function).}
 
-\item{opt_hparams}{A list with optimizer initialization parameters (default: NULL).
+\item{opt_hparams}{A list with optimizer initialization parameters (default: \code{list()}).
 If missing, for each optimizer its individual defaults will be used.}
 
 \item{test_fn}{A test function (default \code{"beale"}). You can also pass

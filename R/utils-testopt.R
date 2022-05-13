@@ -131,7 +131,7 @@ domain_sphere <- function(){
 #'
 #' @param optim          Torch optimizer function.
 #' @param ...            Additional parameters (passed to `image` function).
-#' @param opt_hparams    A list with optimizer initialization parameters (default: NULL).
+#' @param opt_hparams    A list with optimizer initialization parameters (default: `list()`).
 #' If missing, for each optimizer its individual defaults will be used.
 #' @param test_fn        A test function (default `"beale"`). You can also pass
 #'   a list with 2 elements. The first should be a function that will be optimized
@@ -210,10 +210,7 @@ test_optim <- function(optim, ...,
     y <- torch::torch_tensor(y0, requires_grad = TRUE)
 
     # instantiate optimizer
-    if(!is.null(opt_hparams))
-        optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
-    else
-        optim <- do.call(optim, c(list(params = list(x, y))))
+    optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
     grad_keep <-  FALSE
     if (!is.null(optim$classname) && optim$classname == c("optim_adahessian")) {
         grad_keep <- TRUE
