@@ -7,7 +7,7 @@
 test_optim(
   optim,
   ...,
-  opt_hparams = list(lr = 0.01),
+  opt_hparams = list(),
   test_fn = "beale",
   steps = 200,
   pt_start_color = "#5050FF7F",
@@ -28,8 +28,8 @@ test_optim(
 
 \item{...}{Additional parameters (passed to \code{image} function).}
 
-\item{opt_hparams}{A list with optimizer initialize parameters
-(default \code{list(lr = 0.01)}).}
+\item{opt_hparams}{A list with optimizer initialization parameters (default: \code{list()}).
+If missing, for each optimizer its individual defaults will be used.}
 
 \item{test_fn}{A test function (default \code{"beale"}). You can also pass
 a list with 2 elements. The first should be a function that will be optimized

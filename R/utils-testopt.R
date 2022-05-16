@@ -131,8 +131,8 @@ domain_sphere <- function(){
 #'
 #' @param optim          Torch optimizer function.
 #' @param ...            Additional parameters (passed to `image` function).
-#' @param opt_hparams    A list with optimizer initialize parameters
-#'   (default `list(lr = 0.01)`).
+#' @param opt_hparams    A list with optimizer initialization parameters (default: `list()`).
+#' If missing, for each optimizer its individual defaults will be used.
 #' @param test_fn        A test function (default `"beale"`). You can also pass
 #'   a list with 2 elements. The first should be a function that will be optimized
 #'   and the second is a function that returns a named vector with `x0`, `y0`
@@ -155,7 +155,7 @@ domain_sphere <- function(){
 #'
 #' @export
 test_optim <- function(optim, ...,
-                       opt_hparams = list(lr = 0.01),
+                       opt_hparams = list(),
                        test_fn = "beale",
                        steps = 200,
                        pt_start_color = "#5050FF7F",
