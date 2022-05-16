@@ -84,7 +84,7 @@ algorithms can face.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">test_optim</span><span class="op">(</span>
   <span class="va">optim</span>,
   <span class="va">...</span>,
-  opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>,
+  opt_hparams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
   test_fn <span class="op">=</span> <span class="st">"beale"</span>,
   steps <span class="op">=</span> <span class="fl">200</span>,
   pt_start_color <span class="op">=</span> <span class="st">"#5050FF7F"</span>,
@@ -108,8 +108,8 @@ algorithms can face.</p>
 <dt>...</dt>
 <dd><p>Additional parameters (passed to <code>image</code> function).</p></dd>
 <dt>opt_hparams</dt>
-<dd><p>A list with optimizer initialize parameters
-(default <code>list(lr = 0.01)</code>).</p></dd>
+<dd><p>A list with optimizer initialization parameters (default: <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>).
+If missing, for each optimizer its individual defaults will be used.</p></dd>
 <dt>test_fn</dt>
 <dd><p>A test function (default <code>"beale"</code>). You can also pass
 a list with 2 elements. The first should be a function that will be optimized
