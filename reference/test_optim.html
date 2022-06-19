@@ -105,45 +105,78 @@ algorithms can face.</p>
     <h2>Arguments</h2>
     <dl><dt>optim</dt>
 <dd><p>Torch optimizer function.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional parameters (passed to <code>image</code> function).</p></dd>
+
+
 <dt>opt_hparams</dt>
 <dd><p>A list with optimizer initialization parameters (default: <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>).
 If missing, for each optimizer its individual defaults will be used.</p></dd>
+
+
 <dt>test_fn</dt>
 <dd><p>A test function (default <code>"beale"</code>). You can also pass
 a list with 2 elements. The first should be a function that will be optimized
 and the second is a function that returns a named vector with <code>x0</code>, <code>y0</code>
 (the starting points) and <code>xmax</code>, <code>xmin</code>, <code>ymax</code> and <code>ymin</code> (the domain).
 An example: <code>c(x0 = x0, y0 = y0, xmax = 5, xmin = -5, ymax = 5, ymin = -5)</code></p></dd>
+
+
 <dt>steps</dt>
 <dd><p>Number of steps to run (default <code>200</code>).</p></dd>
+
+
 <dt>pt_start_color</dt>
 <dd><p>Starting point color (default <code>"#5050FF7F"</code>)</p></dd>
+
+
 <dt>pt_end_color</dt>
 <dd><p>Ending point color (default <code>"#FF5050FF"</code>)</p></dd>
+
+
 <dt>ln_color</dt>
 <dd><p>Line path color (default <code>"#FF0000FF"</code>)</p></dd>
+
+
 <dt>ln_weight</dt>
 <dd><p>Line path weight (default <code>2</code>)</p></dd>
+
+
 <dt>bg_xy_breaks</dt>
 <dd><p>Background X and Y resolution (default <code>100</code>)</p></dd>
+
+
 <dt>bg_z_breaks</dt>
 <dd><p>Background Z resolution (default <code>32</code>)</p></dd>
+
+
 <dt>bg_palette</dt>
 <dd><p>Background palette (default <code>"viridis"</code>)</p></dd>
+
+
 <dt>ct_levels</dt>
 <dd><p>Contour levels (default <code>10</code>)</p></dd>
+
+
 <dt>ct_labels</dt>
 <dd><p>Should show contour labels? (default <code>FALSE</code>)</p></dd>
+
+
 <dt>ct_color</dt>
 <dd><p>Contour color (default <code>"#FFFFFF7F"</code>)</p></dd>
+
+
 <dt>plot_each_step</dt>
 <dd><p>Should output each step? (default <code>FALSE</code>)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>No return value, called for producing animated gifs</p>
+    
+
+<p>No return value, called for producing animated gifs</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -162,7 +195,7 @@ An example: <code>c(x0 = x0, y0 = y0, xmax = 5, xmin = -5, ymax = 5, ymin = -5)<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
