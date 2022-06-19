@@ -6,13 +6,16 @@ AdaBound
 Adabound
 adabound
 Adadelta
+Adagrad
 AdamW
 adamw
 Adaptivity
+authors’
 Beale
 CMD
 Codecov
 Dazat
+Dozat
 Defazio
 Devendra
 Dvornek
@@ -31,6 +34,7 @@ Hutter
 ICLR
 Idoumghar
 Ilya
+<<<<<<< HEAD
 IJCNN
 IKI
 Ilya
@@ -39,6 +43,10 @@ ISPRS
 ISSN
 isprsjprs
 Jaccard
+=======
+jIp
+jvwB
+>>>>>>> 1c81d1bae674cf2da598077a448b28b859d1488e
 Jianfeng
 Jiang
 Jiawei
@@ -65,12 +73,16 @@ Körner
 Korner
 Kruisselbrink
 Kumar
+<<<<<<< HEAD
 Landrieu
 landsat
 latlong 
 Lhassane
 LKP
 LLKP
+=======
+Keskar
+>>>>>>> 1c81d1bae674cf2da598077a448b28b859d1488e
 Liangchen
 LightGBM
 Liu
@@ -104,23 +116,33 @@ Meng
 Mohr
 mlr
 Momentumized
+Mrpatekful
 Nadam
+<<<<<<< HEAD
 Nesrine
+=======
+nadam
+>>>>>>> 1c81d1bae674cf2da598077a448b28b859d1488e
 Nesterov
 Nesterov’s
 NeurIPS
 Nicha
 Nikolay
+Nitish
 Nonconvex
 Novik
 Oponski
+openreview
+Patrik
 Papademetris
 Pengcheng
+Purgai
 QH
 qhadam
 QHAdam
 qhoptim
 RAdam
+radam
 RMSProp
 RMSprop
 Reddi
@@ -131,6 +153,11 @@ Sanjiv
 Sashank
 Satyen
 Sekhar
+Shekar
+Shirish
+Sochee
+Socher
+warmup
 Tatikonda
 Xiong
 Xiaodong
@@ -143,6 +170,7 @@ Yuanhao
 Zaheer
 zhuang
 Zhuang
+ZJjtNEZ
 al
 arXiv
 arxiv
