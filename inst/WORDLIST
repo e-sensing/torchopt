@@ -34,7 +34,6 @@ Hutter
 ICLR
 Idoumghar
 Ilya
-<<<<<<< HEAD
 IJCNN
 IKI
 Ilya
@@ -43,10 +42,6 @@ ISPRS
 ISSN
 isprsjprs
 Jaccard
-=======
-jIp
-jvwB
->>>>>>> 1c81d1bae674cf2da598077a448b28b859d1488e
 Jianfeng
 Jiang
 Jiawei
@@ -73,16 +68,13 @@ Körner
 Korner
 Kruisselbrink
 Kumar
-<<<<<<< HEAD
 Landrieu
 landsat
-latlong 
+latlong
 Lhassane
 LKP
 LLKP
-=======
 Keskar
->>>>>>> 1c81d1bae674cf2da598077a448b28b859d1488e
 Liangchen
 LightGBM
 Liu
@@ -118,11 +110,8 @@ mlr
 Momentumized
 Mrpatekful
 Nadam
-<<<<<<< HEAD
 Nesrine
-=======
 nadam
->>>>>>> 1c81d1bae674cf2da598077a448b28b859d1488e
 Nesterov
 Nesterov’s
 NeurIPS
@@ -191,13 +180,13 @@ HCL
 hclust
 hotfix
 Hotfix
-href                 
+href
 http
 https
 io
 ir
 inequivalence
-interpolator 
+interpolator
 iteratively
 jettify
 labelled
