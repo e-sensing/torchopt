@@ -9,8 +9,12 @@
 #'
 #' @description
 #' R implementation of the AdaBound optimizer proposed
-#' by Luo et al.(2019). The original implementation is available at
-#' https://github.com/Luolc/AdaBound.
+#' by Luo et al.(2019). We used the implementation available at
+#' https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py.
+#' Thanks to Nikolay Novik for providing the pytorch code.
+#'
+#' The original implementation is licensed using the Apache-2.0 software license.
+#' This implementation is also licensed using Apache-2.0 license.
 #'
 #' AdaBound is a variant of the Adam stochastic optimizer which is
 #' designed to be more robust to extreme learning rates.
@@ -40,10 +44,44 @@
 #'
 #' @returns
 #' A torch optimizer object implementing the `step` method.
+#' @examples
+#' if (torch::torch_is_installed()) {
+
+#' # function to demonstrate optimization
+#' beale <- function(x, y) {
+#'     log((1.5 - x + x * y)^2 + (2.25 - x - x * y^2)^2 + (2.625 - x + x * y^3)^2)
+#'  }
+#' # define optimizer
+#' optim <- torchopt::optim_adabound
+#' # define hyperparams
+#' opt_hparams <- list(lr = 0.01)
 #'
+#' # starting point
+#' x0 <- 3
+#' y0 <- 3
+#' # create tensor
+#' x <- torch::torch_tensor(x0, requires_grad = TRUE)
+#' y <- torch::torch_tensor(y0, requires_grad = TRUE)
+#' # instantiate optimizer
+#' optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
+#' # run optimizer
+#' steps <- 400
+#' x_steps <- numeric(steps)
+#' y_steps <- numeric(steps)
+#' for (i in seq_len(steps)) {
+#'     x_steps[i] <- as.numeric(x)
+#'     y_steps[i] <- as.numeric(y)
+#'     optim$zero_grad()
+#'     z <- beale(x, y)
+#'     z$backward()
+#'     optim$step()
+#' }
+#' print(paste0("starting value = ", beale(x0, y0)))
+#' print(paste0("final value = ", beale(x_steps[steps], y_steps[steps])))
+#' }
 #' @export
 optim_adabound <- torch::optimizer(
-    classname = "optim_adabound",
+    "optim_adabound",
     initialize = function(params,
                           lr = 1e-3,
                           betas = c(0.9, 0.999),
@@ -80,7 +118,7 @@ optim_adabound <- torch::optimizer(
     },
     step = function(closure = NULL) {
         loop_fun <- function(group, param, g, p) {
-            if (purrr::is_null(param$grad))
+            if (is.null(param$grad))
                 next
             grad <- param$grad
 

@@ -2,36 +2,18 @@
 % Please edit documentation in R/utils-testopt.R
 \name{test_optim}
 \alias{test_optim}
-\alias{test_function}
 \title{Test optimization function}
 \usage{
-test_function(
-  test_fn,
-  ...,
-  bg_x_lim = c(-5, 5),
-  bg_y_lim = c(-5, 5),
-  bg_xy_breaks = 100,
-  bg_z_breaks = 32,
-  bg_palette = "viridis",
-  ct_levels = 10,
-  ct_labels = TRUE,
-  ct_color = "#FFFFFF7F"
-)
-
 test_optim(
   optim,
   ...,
-  x0 = runif(1, -5, 5),
-  y0 = runif(1, -5, 5),
-  opt_hparams = list(lr = 0.01),
+  opt_hparams = list(),
   test_fn = "beale",
-  steps = 100,
+  steps = 200,
   pt_start_color = "#5050FF7F",
   pt_end_color = "#FF5050FF",
   ln_color = "#FF0000FF",
   ln_weight = 2,
-  bg_x_lim = NULL,
-  bg_y_lim = NULL,
   bg_xy_breaks = 100,
   bg_z_breaks = 32,
   bg_palette = "viridis",
@@ -42,13 +24,28 @@ test_optim(
 )
 }
 \arguments{
-\item{test_fn}{A test function (default \code{"beale"}).}
+\item{optim}{Torch optimizer function.}
 
 \item{...}{Additional parameters (passed to \code{image} function).}
 
-\item{bg_x_lim}{Background X limits (default \code{NULL})}
+\item{opt_hparams}{A list with optimizer initialization parameters (default: \code{list()}).
+If missing, for each optimizer its individual defaults will be used.}
 
-\item{bg_y_lim}{Background Y limits (default \code{NULL})}
+\item{test_fn}{A test function (default \code{"beale"}). You can also pass
+a list with 2 elements. The first should be a function that will be optimized
+and the second is a function that returns a named vector with \code{x0}, \code{y0}
+(the starting points) and \code{xmax}, \code{xmin}, \code{ymax} and \code{ymin} (the domain).
+An example: \code{c(x0 = x0, y0 = y0, xmax = 5, xmin = -5, ymax = 5, ymin = -5)}}
+
+\item{steps}{Number of steps to run (default \code{200}).}
+
+\item{pt_start_color}{Starting point color (default \code{"#5050FF7F"})}
+
+\item{pt_end_color}{Ending point color (default \code{"#FF5050FF"})}
+
+\item{ln_color}{Line path color (default \code{"#FF0000FF"})}
+
+\item{ln_weight}{Line path weight (default \code{2})}
 
 \item{bg_xy_breaks}{Background X and Y resolution (default \code{100})}
 
@@ -62,25 +59,10 @@ test_optim(
 
 \item{ct_color}{Contour color (default \code{"#FFFFFF7F"})}
 
-\item{optim}{Torch optimizer function.}
-
-\item{x0, y0}{Initial X and Y coordinates
-(default random between \code{-5} and \code{5}).}
-
-\item{opt_hparams}{A list with optimizer initialize parameters
-(default \code{list(lr = 0.01)}).}
-
-\item{steps}{Number of steps to run (default \code{100}).}
-
-\item{pt_start_color}{Starting point color (default \code{"#5050FF7F"})}
-
-\item{pt_end_color}{Ending point color (default \code{"#FF5050FF"})}
-
-\item{ln_color}{Line path color (default \code{"#FF0000FF"})}
-
-\item{ln_weight}{Line path weight (default \code{2})}
-
 \item{plot_each_step}{Should output each step? (default \code{FALSE})}
+}
+\value{
+No return value, called for producing animated gifs
 }
 \description{
 \code{test_optim()} function is useful to visualize how optimizers solve the
@@ -88,11 +70,10 @@ minimization problem by showing the convergence path using a test function.
 User can choose any test optimization
 \href{https://en.wikipedia.org/wiki/Test_functions_for_optimization}{functions}
 provided by \code{torchopt}:
-\itemize{
-\item \code{"beale"}, \code{"booth"}, \code{"bukin_n6"}, \code{"easom"}, \code{"goldstein_price"},
+
+\code{"beale"}, \code{"booth"}, \code{"bukin_n6"}, \code{"easom"}, \code{"goldstein_price"},
 \code{"himmelblau"}, \code{"levi_n13"}, \code{"matyas"}, \code{"rastrigin"},
 \code{"rosenbrock"}, and \code{"sphere"}.
-}
 
 Besides these functions, users can pass any function that receives two
 numerical values and returns a scalar.
@@ -103,14 +84,6 @@ These functions give an idea about the different situations that optimization
 algorithms can face.
 
 Function \code{test_function()} plot the 2D-space of a test optimization function.
-}
-\examples{
-# plot test function 2D-space
-test_function("rosenbrock")
-
-# plot optimization path of a initially random stating point
-test_optim(optim_madgrad)
-
 }
 \author{
 Rolf Simoes, \email{rolf.simoes@inpe.br}

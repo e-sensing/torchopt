@@ -1,7 +1,17 @@
+^README\.md$
 ^README\.Rmd$
+^README_cache$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^codecov\.yml$
 ^\.github$
 ^CODE_OF_CONDUCT\.md$
+^contributing.md$
 ^README_cache$
+^LICENSE\.md$
+^README_cache$
+^man/figures/*$
+^\.Rprofile$
+^\.RData$
+^\.tmp$
+^CRAN-SUBMISSION$

@@ -38,6 +38,9 @@ by Zaheer et al.(2019). We used the implementation available at
 https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py.
 Thanks to Nikolay Novik for providing the pytorch code.
 
+The original implementation is licensed using the Apache-2.0 software license.
+This implementation is also licensed using Apache-2.0 license.
+
 From the abstract by the paper by Zaheer et al.(2019):
 Adaptive gradient methods that rely on scaling gradients
 down by the square root of exponential moving averages
@@ -52,6 +55,41 @@ leading to even better performance with similar theoretical
 guarantees on convergence. Extensive experiments show that
 Yogi with very little hyperparameter tuning outperforms
 methods such as Adam in several challenging machine learning tasks.
+}
+\examples{
+if (torch::torch_is_installed()) {
+# function to demonstrate optimization
+beale <- function(x, y) {
+    log((1.5 - x + x * y)^2 + (2.25 - x - x * y^2)^2 + (2.625 - x + x * y^3)^2)
+ }
+# define optimizer
+optim <- torchopt::optim_yogi
+# define hyperparams
+opt_hparams <- list(lr = 0.01)
+
+# starting point
+x0 <- 3
+y0 <- 3
+# create tensor
+x <- torch::torch_tensor(x0, requires_grad = TRUE)
+y <- torch::torch_tensor(y0, requires_grad = TRUE)
+# instantiate optimizer
+optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
+# run optimizer
+steps <- 400
+x_steps <- numeric(steps)
+y_steps <- numeric(steps)
+for (i in seq_len(steps)) {
+    x_steps[i] <- as.numeric(x)
+    y_steps[i] <- as.numeric(y)
+    optim$zero_grad()
+    z <- beale(x, y)
+    z$backward()
+    optim$step()
+}
+print(paste0("starting value = ", beale(x0, y0)))
+print(paste0("final value = ", beale(x_steps[steps], y_steps[steps])))
+}
 }
 \references{
 Manzil Zaheer, Sashank Reddi, Devendra Sachan, Satyen Kale, Sanjiv Kumar,
