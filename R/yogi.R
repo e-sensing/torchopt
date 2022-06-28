@@ -88,7 +88,7 @@
 #' }
 #' @export
 optim_yogi <- torch::optimizer(
-    classname = "optim_yogi",
+    "optim_yogi",
     initialize = function(params,
                           lr = 0.01,
                           betas = c(0.9, 0.999),

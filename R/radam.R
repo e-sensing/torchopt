@@ -83,7 +83,7 @@
 #' }
 #' @export
 optim_radam <- torch::optimizer(
-    classname = "optim_radam",
+    "optim_radam",
     initialize = function(params,
                           lr = 0.01,
                           betas = c(0.9, 0.999),

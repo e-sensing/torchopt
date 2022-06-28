@@ -212,7 +212,7 @@ test_optim <- function(optim, ...,
     # instantiate optimizer
     optim <- do.call(optim, c(list(params = list(x, y)), opt_hparams))
     grad_keep <-  FALSE
-    if (!is.null(optim$classname) && optim$classname == c("optim_adahessian")) {
+    if (inherits(optim, "optim_adahessian")) {
         grad_keep <- TRUE
         # retain_graph is not exposed before torch 0.7.2
         if (!utils::packageVersion("torch") > '0.7.2') {
