@@ -34,6 +34,8 @@ library(devtools)
 install_github("e-sensing/torchopt")
 ```
 
+    #> Warning: package 'torch' was built under R version 4.1.3
+
 ## Provided optimizers
 
 `torchopt` package provides the following R implementations of torch
