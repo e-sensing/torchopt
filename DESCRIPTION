@@ -3,13 +3,13 @@ Package: torchopt
 Title: Advanced Optimizers for Torch
 Version: 0.1.2
 Authors@R: c(
-    person("Gilberto", "Camara", , "gilberto.camara@inpe.br", role = c("aut", "cre")),
+    person("Gilberto", "Camara", , "gilberto.camara.inpe@gmail.com", role = c("aut", "cre")),
     person("Rolf", "Simoes", , "rolf.simoes@inpe.br", role = "aut"),
     person("Daniel", "Falbel", , "daniel.falbel@gmail.com", role = "aut"),
     person("Felipe", "Souza", , "felipe.carvalho@inpe.br", role = "aut"),
     person("Alber", "Sanchez", , "alber.ipia@inpe.br", role = "aut")
   )
-Maintainer: Gilberto Camara <gilberto.camara@inpe.br>
+Maintainer: Gilberto Camara <gilberto.camara.inpe@gmail.com>
 Description: Optimizers for 'torch' deep learning library. These
     functions include recent results published in the literature and are
     not part of the optimizers offered in 'torch'. Prospective users
@@ -41,4 +41,4 @@ ByteCompile: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
