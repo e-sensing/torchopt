@@ -34,7 +34,7 @@
 #' An optimizer object implementing the `step` and `zero_grad` methods.
 #' @export
 optim_adahessian <- torch::optimizer(
-    classname = "optim_adahessian",
+    "optim_adahessian",
     initialize = function(
         params,
         lr = 0.15,

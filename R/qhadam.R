@@ -83,7 +83,7 @@
 #'
 #' @export
 optim_qhadam <- torch::optimizer(
-    classname = "optim_qhadam",
+    "optim_qhadam",
     initialize = function(params,
                           lr = 0.01,
                           betas = c(0.9, 0.999),

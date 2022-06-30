@@ -73,7 +73,7 @@
 #' }
 #' @export
 optim_madgrad <- torch::optimizer(
-    classname = "optim_madgrad",
+    "optim_madgrad",
     initialize = function(params,
                           lr = 1e-2,
                           momentum = 0.9,

@@ -3,13 +3,13 @@ Package: torchopt
 Title: Advanced Optimizers for Torch
 Version: 0.1.2
 Authors@R: c(
-    person("Gilberto", "Camara", , "gilberto.camara@inpe.br", role = c("aut", "cre")),
+    person("Gilberto", "Camara", , "gilberto.camara.inpe@gmail.com", role = c("aut", "cre")),
     person("Rolf", "Simoes", , "rolf.simoes@inpe.br", role = "aut"),
     person("Daniel", "Falbel", , "daniel.falbel@gmail.com", role = "aut"),
     person("Felipe", "Souza", , "felipe.carvalho@inpe.br", role = "aut"),
     person("Alber", "Sanchez", , "alber.ipia@inpe.br", role = "aut")
   )
-Maintainer: Gilberto Camara <gilberto.camara@inpe.br>
+Maintainer: Gilberto Camara <gilberto.camara.inpe@gmail.com>
 Description: Optimizers for 'torch' deep learning library. These
     functions include recent results published in the literature and are
     not part of the optimizers offered in 'torch'. Prospective users
@@ -17,13 +17,14 @@ Description: Optimizers for 'torch' deep learning library. These
     depends on the specific problem being solved.  The packages includes
     the following optimizers: (a) 'adabelief' by Zhuang et al (2020),
     <arXiv:2010.07468>; (b) 'adabound' by Luo et al.(2019),
-    <arXiv:1902.09843>; (c) 'adamw' by Loshchilov & Hutter (2019),
-    <arXiv:1711.05101>; (d) 'madgrad' by Defazio and Jelassi (2021),
-    <arXiv:2101.11075>; (e) 'nadam' by Dozat (2019),
-    <https://openreview.net/pdf/OM0jvwB8jIp57ZJjtNEZ.pdf>; (f) 'qhadam' by
-    Ma and Yarats(2019), <arXiv:1810.06801>; (g) 'radam' by Liu et al.
-    (2019), <arXiv:1908.03265>; (h) 'swats' by Shekar and Sochee (2018),
-    <arXiv:1712.07628>; (i) 'yogi' by Zaheer et al.(2019),
+    <arXiv:1902.09843>; (c) 'adahessian' by Yao et al.(2021)
+    <arXiv:2006.00719>; (d) 'adamw' by Loshchilov & Hutter (2019),
+    <arXiv:1711.05101>; (e) 'madgrad' by Defazio and Jelassi (2021),
+    <arXiv:2101.11075>; (f) 'nadam' by Dozat (2019),
+    <https://openreview.net/pdf/OM0jvwB8jIp57ZJjtNEZ.pdf>; (g) 'qhadam' by
+    Ma and Yarats(2019), <arXiv:1810.06801>; (h) 'radam' by Liu et al.
+    (2019), <arXiv:1908.03265>; (i) 'swats' by Shekar and Sochee (2018),
+    <arXiv:1712.07628>; (j) 'yogi' by Zaheer et al.(2019),
     <https:://papers.nips.cc/paper/8186-adaptive-methods-for-nonconvex-optimization>. 
 License: Apache License (>= 2)
 URL: https://github.com/e-sensing/torchopt/
@@ -40,4 +41,4 @@ ByteCompile: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0

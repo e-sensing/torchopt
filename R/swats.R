@@ -82,7 +82,7 @@
 #' }
 #' @export
 optim_swats <- torch::optimizer(
-    classname = "optim_swats",
+    "optim_swats",
     initialize = function(params,
                           lr = 0.01,
                           betas = c(0.9, 0.999),

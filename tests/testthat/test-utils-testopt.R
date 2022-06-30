@@ -1,5 +1,5 @@
 test_that("can use custom functions with test_opt", {
-
+    testthat::skip_on_cran()
     set.seed(1)
     expect_error(regexp = NA,{
         test_optim(

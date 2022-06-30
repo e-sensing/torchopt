@@ -77,7 +77,7 @@
 #' }
 #' @export
 optim_adamw <- torch::optimizer(
-    classname = "optim_adamw",
+    "optim_adamw",
     initialize = function(params,
                           lr = 0.01,
                           betas = c(0.9, 0.999),

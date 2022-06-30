@@ -93,7 +93,7 @@
 #' }
 #' @export
 optim_adabelief <- torch::optimizer(
-    classname = "optim_adabelief",
+    "optim_adabelief",
     initialize = function(params,
                           lr = 0.001,
                           betas = c(0.9, 0.999),

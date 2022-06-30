@@ -74,7 +74,7 @@
 #' }
 #' @export
 optim_nadam <- torch::optimizer(
-    classname = "optim_nadam",
+    "optim_nadam",
     initialize = function(params,
                           lr = 0.002,
                           betas = c(0.9, 0.999),

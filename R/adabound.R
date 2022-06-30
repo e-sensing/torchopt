@@ -81,7 +81,7 @@
 #' }
 #' @export
 optim_adabound <- torch::optimizer(
-    classname = "optim_adabound",
+    "optim_adabound",
     initialize = function(params,
                           lr = 1e-3,
                           betas = c(0.9, 0.999),
