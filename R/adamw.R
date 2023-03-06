@@ -145,7 +145,7 @@ optim_adamw <- torch::optimizer(
 
             # L2 correction (different from adam)
             if (weight_decay != 0)
-                param$add_(-weight_decay * lr)
+                param$add_(param, -weight_decay * lr)
             # go to next step
             param$addcdiv_(exp_avg, denom, value = -step_size)
         }
