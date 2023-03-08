@@ -1,13 +1,12 @@
 Type: Package
 Package: torchopt
 Title: Advanced Optimizers for Torch
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: c(
     person("Gilberto", "Camara", , "gilberto.camara.inpe@gmail.com", role = c("aut", "cre")),
     person("Rolf", "Simoes", , "rolf.simoes@inpe.br", role = "aut"),
     person("Daniel", "Falbel", , "daniel.falbel@gmail.com", role = "aut"),
-    person("Felipe", "Souza", , "felipe.carvalho@inpe.br", role = "aut"),
-    person("Alber", "Sanchez", , "alber.ipia@inpe.br", role = "aut")
+    person("Felipe", "Souza", , "felipe.carvalho@inpe.br", role = "aut")
   )
 Maintainer: Gilberto Camara <gilberto.camara.inpe@gmail.com>
 Description: Optimizers for 'torch' deep learning library. These
