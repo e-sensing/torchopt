@@ -1,5 +1,9 @@
 # R Implementation of Advanced Optimizers for Torch
 
+### What's new in torchopt version 0.1.4
+
+* fixed errors in DESCRIPTION
+
 ### What's new in torchopt version 0.1.2
 
 * adahessian optimizer
